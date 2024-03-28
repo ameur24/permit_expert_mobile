@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:test2/my_ui/my_botton/my_button.dart';
-import 'package:test2/my_ui/sign_up.dart';
-import 'package:test2/my_ui/VerificationScreen.dart';
+import 'package:test2/my_ui/login_ui.dart';
 
-class LoginUI extends StatelessWidget {
-  const LoginUI({Key? key});
+
+class VerificationScreen extends StatelessWidget {
+  const VerificationScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,9 @@ class LoginUI extends StatelessWidget {
               height: 147,
               width: 171,
             ),
-            const SizedBox(height: 42),
+            const SizedBox(height: 12),
             Text(
-              "Connexion",
+              "Code de vérification",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -30,13 +30,13 @@ class LoginUI extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              "Bienvenue sur Permit Expert",
+              "Nous avons envoyé le code de vérification à votre adresse e-mail",
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 42),
+            const SizedBox(height:120),
             Column(
               children: [
                 Container(
@@ -51,9 +51,10 @@ class LoginUI extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Email',
+                      hintText: ' Adresse Email',
                       hintStyle: TextStyle(color: Colors.grey),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
@@ -67,67 +68,20 @@ class LoginUI extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 3,
-                        blurRadius: 7,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Mot de passe',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.lock, color: Colors.grey),
-                      contentPadding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                    ),
-                    obscureText: true,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                TextButton(
-                  onPressed: () {
-                    // Handle "Mot de passe oublié ?" button press
-                  },
-                  child: Text(
-                    "Mot de passe oublié ?",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
 
-
-                const SizedBox(height: 16),
+                const SizedBox(height: 120),
                 MyButton(
                   txt: "Se Connecter", // Changed button text for consistency
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => VerificationScreen()),
-                    );
+                    print("Le bouton 'Se Connecter' a été pressé !");
                   },
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Vous n'avez pas de compte ?",
+                      "Vous avez déja un compte ?",
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
@@ -135,14 +89,12 @@ class LoginUI extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Naviguer vers l'écran de connexion lorsque le bouton "Ignorer" est cliqué
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUp()),
-                        );
-                      },
+                          MaterialPageRoute(builder: (context) => LoginUI()),
+                        );                      },
                       child: Text(
-                        "S'inscrire",
+                        "Se connecter",
                         style: TextStyle(
                           color: Colors.orange,
                           fontSize: 14,
