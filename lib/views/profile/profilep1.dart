@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:test2/views/Learn/Notification.dart';
+import 'package:test2/views/Notification/notification.dart';
+import 'package:test2/views/profile/profilep2.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
 
+import '../Notification/list_notifications.dart';
 import '../login/login_ui.dart';
+import '../parametre.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -44,8 +46,8 @@ class _ProfilePageState extends State<ProfilePage> {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(NotificationsScreen());
- },
+              Get.to(ListNotifications());
+            },
           ),
         ],
       ),
@@ -123,56 +125,38 @@ class _ProfilePageState extends State<ProfilePage> {
             width: 328,
             height: 45,
             child: MyButton(
-              txt: 'Modifier',
+              txt: 'Modifier'.tr,
               onPressed: () {
+                Get.to(ProfilePage2());
               },
             ),
           ),
           SizedBox(height: 20),
-
-
           Container(
             width: 360,
             height: 2,
             color: Color(0xFFE7E7E7),
           ),
-
-
           GestureDetector(
             onTap: () {
-
+              Get.to(ParametresPage());
             },
             child: ListTile(
               leading: Icon(Icons.settings, color: Colors.black),
               title: Text(
-                'Paramètres',
+                'Paramètres'.tr,
                 style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: Colors.black),
               ),
             ),
           ),
-
-          // Section Mes données personnelles
           GestureDetector(
             onTap: () {
-
+              Get.to((LoginUI()));
             },
-            child: ListTile(
-              leading: Icon(Icons.person, color: Colors.black),
-              title: Text(
-                'Mes données personnelles',
-                style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: Colors.black),
-              ),
-            ),
-          ),
-
-          // Section Déconnexion
-          GestureDetector(
-            onTap: () {
-              Get.to((LoginUI()) ,);           },
             child: ListTile(
               leading: Icon(Icons.exit_to_app, color: Colors.black),
               title: Text(
-                'Déconnexion',
+                'Déconnexion'.tr,
                 style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: Colors.black),
               ),
             ),

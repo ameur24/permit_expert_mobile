@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Learn/Notification.dart';
+import 'package:test2/views/Notification/notification.dart';
 import 'package:test2/views/calendar/calendar.dart';
 import '../../widgets/container/CustomContainer.dart';
 import '../Learn/learn1.dart';
 import '../MessageScreen.dart';
+import '../Paiement/paiement_screen.dart';
+import '../calendar/calendar_event.dart';
 import '../profile/profilep1.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,14 +39,14 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10.0),
 
                   child: Text(
-                    'Bienvenue au PermitExpert',
+                    'Bienvenue_au_PermitExpert'.tr,
                     style: TextStyle(fontSize: 20, fontFamily: 'Poppins', color: Color(0xFF09244B)),
                   ),
 
               ),
               SizedBox(width: 10),
               Image.asset(
-                'assets/images/image 296.png', // Remplacez par le chemin de votre image
+                'assets/images/image 296.png',
                 width: 25,
                 height: 25,
               ),
@@ -58,9 +60,9 @@ class HomeScreen extends StatelessWidget {
                 child: CustomContainer(
                   color: Color(0xFFDF7588),
                   imagePath: 'assets/images/capture_d___cran_2024-04-14_233651-removebg-preview_480 1.png', // Chemin de l'image du premier conteneur
-                  text: 'Consulter  le calendrier',
+                  text: 'Consulter_le_calendrier'.tr,
                   onPressed: (){
-                    Get.to(CalendarScreen());
+                    Get.to(CalendarScreen2());
                   }, imageWidth: 53,
                   imageHeight: 72,
 
@@ -70,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                 child: CustomContainer(
                   color: Color(0xFFFA9135),
                   imagePath: 'assets/images/capture_d___cran_2024-04-15_001601-removebg-preview_480 1.png', // Chemin de l'image du deuxième conteneur
-                  text: 'Apprendre le code',
+                  text: 'Apprendre_le_code'.tr,
                   onPressed: (){
                     Get.to(LearnScreen());
                   }, imageWidth: 123,
@@ -87,8 +89,9 @@ class HomeScreen extends StatelessWidget {
                 child: CustomContainer(
                   color: Color(0xFF60C1DC),
                   imagePath: 'assets/images/capture_d___cran_2024-04-15_001139-removebg-preview_480 1.png', // Chemin de l'image du troisième conteneur
-                  text: "Consulter l'historique de paiement",
+                  text: "Consulter_l'historique_de_paiement".tr,
                   onPressed: (){
+                    Get.to(PaymentScreen());
 
                   }, imageWidth: 125,
                   imageHeight: 99,
@@ -99,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                 child: CustomContainer(
                   color: Colors.lightGreen,
                   imagePath: 'assets/images/Capture_d_écran_2024-04-14_233103-removebg-preview 1.png', // Chemin de l'image du quatrième conteneur
-                  text: 'Laisser un  message',
+                  text: 'Laisser_un_message'.tr,
                   onPressed: (){
                     Get.to(MessageScreen());
                   },

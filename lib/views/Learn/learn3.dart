@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Learn/Notification.dart';
+import 'package:test2/views/Notification/notification.dart';
 import 'package:test2/views/profile/profilep1.dart';
-
 import '../../widgets/container/greencontainer.dart';
 import '../../widgets/container/learnContainer.dart';
 import '../../widgets/container/vidcontainer.dart';
+import '../Notification/list_notifications.dart';
 
 class MyScreen1 extends StatelessWidget {
   @override
@@ -16,7 +16,7 @@ class MyScreen1 extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(NotificationsScreen());
+              Get.to(ListNotifications());
             },
           ),
           IconButton(
@@ -31,8 +31,8 @@ class MyScreen1 extends StatelessWidget {
         children: [
           SizedBox(height: 30),
           GreenContainer(
-            titre: "Série n° 1 :",
-            sousTitre: "Règles en Route",
+            titre:  'Série_nb'.tr+' 2',
+            sousTitre: 'Sur_la_Voie_de_la_Sécurité'.tr,
             imageUrl: "assets/images/26-removebg-preview 1.png",
             imageWidth: 150,
             imageHeight: 150,
@@ -43,7 +43,7 @@ class MyScreen1 extends StatelessWidget {
             containerHeight: 111,
             barWidth: 2,
             barHeight: 70,
-            title: "Voici une ressource qui peut vous aider:",
+            title: 'Voici_une_ressource_qui_peut_vous_aider:'.tr,
             link: "https://www.ressource.com/", // Ajoutez le lien ici
           ),
           SizedBox(height: 10),
@@ -52,7 +52,7 @@ class MyScreen1 extends StatelessWidget {
             containerHeight: 111,
             barWidth: 2,
             barHeight: 75,
-            title: "Voici un test en ligne qui peut vous aider:",
+            title: 'Voici_un_test_en_ligne_qui_peut_vous_aider:'.tr,
             link: "https://www.permisecole.com/code/gratuit", // Ajoutez le lien ici
           ),
           SizedBox(height: 10),
@@ -61,12 +61,12 @@ class MyScreen1 extends StatelessWidget {
             containerHeight: 260,
             barWidth: 2,
             barHeight: 228,
-            title: 'Voici quelques vidéos qui peuvent vous aider:',
+            title: 'Voici_quelques_vidéos_qui_peuvent_vous_aider:'.tr,
             imagePaths: [
               'assets/images/vid1.png',
               'assets/images/vid1.png',
               'assets/images/vid1.png',
-              // Ajout des chemins d'images pour la deuxième rangée
+
               'assets/images/vid1.png',
               'assets/images/vid1.png',
               'assets/images/vid1.png',

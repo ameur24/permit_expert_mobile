@@ -1,12 +1,17 @@
+import 'package:get/get_navigation/src/root/internacionalization.dart';
 
-final Map<String, String> fr = {
+
+class Fr extends Translations {
+  @override
+  Map<String, Map<String, String>> get keys => {
+  'fr': {
   'Profil': 'Profil',
   'Modifier': 'Modifier',
   'Paramètres': 'Paramètres',
   'Mes_données_personnelles': 'Mes données personnelles',
   'Déconnexion': 'Déconnexion',
   'Apprendre_le_code': 'Apprendre le code',
-  'Série_n°_nb:': 'Série n° :',
+  'Série_nb': 'Série n° :',
   'Règles_en_Route': 'Règles en Route',
   'Sur_la_Voie_de_la_Sécurité': 'Sur la Voie de la Sécurité',
   'Les_Signaux_de_la_Route': 'Les Signaux de la Route',
@@ -38,6 +43,12 @@ final Map<String, String> fr = {
   'Confirmer_votre_mot_de_passe': 'Confirmer votre mot de passe',
   'Vous_avez_déjà_un_compte_?': 'Vous avez déjà un compte ?',
   'Se_connecter': 'Se connecter',
+  'Voici_une_ressource_qui_peut_vous_aider:': 'Voici une ressource qui peut vous aider:',
+  'Voici_un_test_en_ligne_qui_peut_vous_aider:': 'Voici un test en ligne qui peut vous aider:',
+  'Voici_quelques_vidéos_qui_peuvent_vous_aider:': 'Voici quelques vidéos qui peuvent vous aider:',
 
 
-};
+
+  },
+  };
+}

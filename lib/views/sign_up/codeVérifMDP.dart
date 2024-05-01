@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
-import 'package:test2/views/login/login_ui.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../widgets/TextfieldOTP/TextfieldOTP.dart';
 import '../../data/controllers/controller.dart';
 import 'Réinitialisation.dart';
-import 'inscription.dart';
+
 
 class VerificationMDP extends StatefulWidget {
   const VerificationMDP({Key? key});

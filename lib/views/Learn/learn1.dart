@@ -5,8 +5,9 @@ import 'package:test2/views/Learn/learn4.dart';
 import 'package:test2/views/Learn/learn5.dart';
 
 import '../../widgets/container/greycontainer.dart';
+import '../Notification/list_notifications.dart';
 import '../profile/profilep1.dart';
-import 'Notification.dart';
+import '../Notification/notification.dart';
 import 'learn2.dart';
 
 class LearnScreen extends StatelessWidget {
@@ -15,14 +16,14 @@ class LearnScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Apprendre le code',
+          'Apprendre_le_code'.tr,
           style: TextStyle(fontSize: 17, fontFamily: 'Poppins'),
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(NotificationsScreen());
+              Get.to(ListNotifications());
             },
           ),
           IconButton(
@@ -33,63 +34,66 @@ class LearnScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Container(
-            width: 330,
-            height: 181,
-            margin: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.lightGreen,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 78),
-                child: Image.asset(
-                  'assets/images/Capture_d_écran_2024-04-17_155431-removebg-preview.png',
-                  width: 700,
-                  height: 133,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: 330,
+              height: 181,
+              margin: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.lightGreen,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 78),
+                  child: Image.asset(
+                    'assets/images/Capture_d_écran_2024-04-17_155431-removebg-preview.png',
+                    width: 700,
+                    height: 133,
+                  ),
                 ),
               ),
             ),
-          ),
-          _buildCustomContainerWithProgress(
-            'Série n° 1:',
-            'Règles en Route',
-            'assets/images/24 1.png',
-            60,
-            onPressed: () {
-      Get.to(MyScreen());
-            },
-          ),
-          _buildCustomContainerWithProgress(
-            'Série n° 2:',
-            'Sur la Voie de la Sécurité',
-            'assets/images/26-removebg-preview 1.png',
-            30,
-            onPressed: () {
-              Get.to(MyScreen1());
-                 },
-          ),
-          _buildCustomContainerWithProgress(
-            'Série n° 3:',
-            'Les Signaux de la Route',
-            'assets/images/27-removebg-preview 1.png',
-            80,
-            onPressed: () {
-              Get.to(MyScreen2());            },
-          ),
-          _buildCustomContainerWithProgress(
-            'Série n° 4:',
-            'Conduite Maitrisée',
-            'assets/images/may-removebg-preview 1.png',
-            40,
-            onPressed: () {
-              Get.to(MyScreen3());
-            },
-          ),
-        ],
+            _buildCustomContainerWithProgress(
+              'Série_nb'.tr+' 1',
+              'Règles_en_Route'.tr,
+              'assets/images/24 1.png',
+              60,
+              onPressed: () {
+                Get.to(MyScreen());
+              },
+            ),
+            _buildCustomContainerWithProgress(
+              'Série_nb'.tr+' 2',
+              'Sur_la_Voie_de_la_Sécurité'.tr,
+              'assets/images/26-removebg-preview 1.png',
+              30,
+              onPressed: () {
+                Get.to(MyScreen1());
+              },
+            ),
+            _buildCustomContainerWithProgress(
+              'Série_nb'.tr+' 3',
+              'Les_Signaux_de_la_Route'.tr,
+              'assets/images/27-removebg-preview 1.png',
+              80,
+              onPressed: () {
+                Get.to(MyScreen2());
+              },
+            ),
+            _buildCustomContainerWithProgress(
+              'Série_nb'.tr+' 4',
+              'Conduite_Maitrisée'.tr,
+              'assets/images/may-removebg-preview 1.png',
+              40,
+              onPressed: () {
+                Get.to(MyScreen3());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

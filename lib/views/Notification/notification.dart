@@ -18,7 +18,8 @@ class NotificationsScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-Get.to(ProfilePage())      ;      },
+              Get.to(ProfilePage());
+              },
           ),
         ],
       ),
@@ -33,7 +34,7 @@ Get.to(ProfilePage())      ;      },
                 height: 502,
                 child: Image.asset(
                   'assets/images/notif.png',
-                  width: 349,
+                  width: 347,
                   height: 502,
                 ),
               ),

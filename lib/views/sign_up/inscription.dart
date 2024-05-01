@@ -113,7 +113,7 @@ class Inscription extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.grey.withOpacity(0.3),
             spreadRadius: 3,
             blurRadius: 7,
             offset: Offset(0, 3),

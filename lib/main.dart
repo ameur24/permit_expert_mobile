@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:test2/constants/colors.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 import 'package:test2/views/onboarding//onboarding_view.dart';
 import 'package:test2/views/login/login_ui.dart';
-import 'package:test2/views/sign_up/sign_up.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Importez flutter_svg
+import 'helper/dependencies.dart' as dep;
 
-import 'package:get/get.dart';
-
-
-
-
+import 'fr.dart';
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   await GetStorage.init();
   runApp(const MyApp());
 }
@@ -25,7 +22,12 @@ class MyApp extends StatelessWidget {
 
     return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'myApplication',
+      theme:ThemeData.light() ,
+      title: 'permitExpert',
+        translations: Fr(),
+        locale: Locale('fr', 'FR'),
+        fallbackLocale: Locale('fr', 'FR'),
+
 
 
 
@@ -41,8 +43,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // You can implement any logic you need here to decide whether to show login or signup screen
-    // For simplicity, let's just show the login screen
+
     return const LoginUI();
   }
 }

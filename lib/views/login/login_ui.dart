@@ -4,11 +4,17 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
 import 'package:test2/views/sign_up/sign_up.dart';
-import '../Home/HomeScreen.dart';
+import '../Home/home_screen.dart';
 import '../sign_up/mdpOublie.dart';
 
-class LoginUI extends StatelessWidget {
+class LoginUI extends StatefulWidget {
   const LoginUI({Key? key});
+
+  @override
+  State<LoginUI> createState() => _LoginUIState();
+}
+
+class _LoginUIState extends State<LoginUI> {
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +58,21 @@ class LoginUI extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: Colors.grey.withOpacity(0.3),
                           spreadRadius: 3,
                           blurRadius: 7,
                           offset: Offset(0, 3),
                         ),
                       ],
                     ),
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (v){
+                        if(v!.isEmpty)
+                          return 'Le mot de passe est obligatoire';
+                        if(GetUtils.isEmail(v))
+                          return 'Email invalide';
+                        return null;
+                      },
                       decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(color: Colors.grey),
@@ -81,7 +94,7 @@ class LoginUI extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: Colors.grey.withOpacity(0.3),
                           spreadRadius: 3,
                           blurRadius: 7,
                           offset: Offset(0, 3),

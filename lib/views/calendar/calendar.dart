@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
-import '../../widgets/container/CustomEventContainer.dart';
-import '../Learn/Notification.dart';
+import '../Notification/notification.dart';
 import '../profile/profilep1.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -50,14 +48,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications), // icône de notification
+            icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(NotificationsScreen ())      ;             },
+              Get.to(NotificationsScreen());
+            },
           ),
           IconButton(
-            icon: Icon(Icons.account_circle), // icône de profil
+            icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to(ProfilePage())      ;
+              Get.to(ProfilePage());
             },
           ),
         ],
@@ -96,10 +95,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
               selectedDecoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.orange,
+                color: Colors.lightGreen,
               ),
               selectedTextStyle: TextStyle(color: Colors.white),
             ),
+
             headerStyle: HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
@@ -108,7 +108,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 fontWeight: FontWeight.normal,
                 fontFamily: 'Poppins',
                 fontSize: 20,
-                color: Colors.black, // Couleur du mois actuel
+                color: Colors.black,
               ),
               titleTextFormatter: (date, locale) {
                 String monthText = DateFormat.MMMM(locale).format(date);
@@ -129,7 +129,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   'Aucun événement',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.grey, // Couleur pour "Aucun événement"
+                    color: Colors.grey,
                     fontFamily: 'Poppins',
                   ),
                 ),
@@ -146,7 +146,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
             ),
           ),
-
         ],
       ),
     );
