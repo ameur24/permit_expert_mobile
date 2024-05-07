@@ -1,13 +1,15 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../contants.dart';
+
 class ApiClient extends GetConnect implements GetxService {
   late String token;
   final String appBaseUrl;
   late Map<String, String> _mainHeaders;
 
-  ApiClient(this.token, this._mainHeaders, {required this.appBaseUrl}) {
-    baseUrl = appBaseUrl;
+  ApiClient({required this.appBaseUrl}) {
+    baseUrl = Constants.baseUrl;
     timeout = const Duration(seconds: 30);
     token = GetStorage().read('TOKEN') ?? "";
     _mainHeaders = {

@@ -1,21 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:test2/widgets/my_botton/my_button.dart';
-import 'package:test2/views/sign_up/sign_up.dart';
-import '../Home/home_screen.dart';
+import '../../data/controllers/auth_controller.dart';
+import '../../widgets/my_botton/my_button.dart';
 import '../sign_up/mdpOublie.dart';
+import '../sign_up/sign_up.dart';
 
-class LoginUI extends StatefulWidget {
-  const LoginUI({Key? key});
-
-  @override
-  State<LoginUI> createState() => _LoginUIState();
-}
-
-class _LoginUIState extends State<LoginUI> {
-
+class LoginUI extends StatelessWidget {
+  final AuthController authController = Get.put(AuthController());
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,13 +59,7 @@ class _LoginUIState extends State<LoginUI> {
                       ],
                     ),
                     child: TextFormField(
-                      validator: (v){
-                        if(v!.isEmpty)
-                          return 'Le mot de passe est obligatoire';
-                        if(GetUtils.isEmail(v))
-                          return 'Email invalide';
-                        return null;
-                      },
+                      controller: emailController,
                       decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(color: Colors.grey),
@@ -102,6 +89,7 @@ class _LoginUIState extends State<LoginUI> {
                       ],
                     ),
                     child: TextField(
+                      controller: passwordController,
                       decoration: InputDecoration(
                         hintText: 'Mot de passe',
                         hintStyle: TextStyle(color: Colors.grey),
@@ -133,10 +121,10 @@ class _LoginUIState extends State<LoginUI> {
                   ),
                   const SizedBox(height: 26),
                   MyButton(
-                    txt: "Se Connecter",
                     onPressed: () {
-                      Get.to(HomeScreen());
+                      authController.login(emailController.text, passwordController.text);
                     },
+                    txt: 'Se connecter',
                   ),
                   const SizedBox(height: 50),
                   Row(
@@ -151,10 +139,7 @@ class _LoginUIState extends State<LoginUI> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
-                          );
+                          Get.to(SignUp()); // Utilisation de GetX pour la navigation
                         },
                         child: Text(
                           "S'inscrire",
