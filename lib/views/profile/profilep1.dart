@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:test2/routes/routes_helper.dart';
 import 'package:test2/views/Notification/notification.dart';
 import 'package:test2/views/profile/profilep2.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
@@ -56,11 +57,15 @@ class _ProfilePageState extends State<ProfilePage> {
           GestureDetector(
             onTap: getImage,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 100.0, vertical: 0),
               child: Container(
                 width: 152,
                 height: 152,
-                margin: EdgeInsets.only(top: AppBar().preferredSize.height + MediaQuery.of(context).padding.top - 10),
+                margin: EdgeInsets.only(
+                    top: AppBar().preferredSize.height +
+                        MediaQuery.of(context).padding.top -
+                        10),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                 ),
@@ -116,7 +121,8 @@ class _ProfilePageState extends State<ProfilePage> {
           SizedBox(height: 8),
           Text(
             '+21654727496',
-            style: TextStyle(fontSize: 14, fontFamily: 'Poppins', color: Colors.grey),
+            style: TextStyle(
+                fontSize: 14, fontFamily: 'Poppins', color: Colors.grey),
           ),
           SizedBox(height: 23),
 
@@ -145,19 +151,21 @@ class _ProfilePageState extends State<ProfilePage> {
               leading: Icon(Icons.settings, color: Colors.black),
               title: Text(
                 'Paramètres'.tr,
-                style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: Colors.black),
+                style: TextStyle(
+                    fontSize: 16, fontFamily: 'Poppins', color: Colors.black),
               ),
             ),
           ),
           GestureDetector(
             onTap: () {
-              Get.to((LoginUI()));
+              Get.toNamed(RouteHelper.signIn);
             },
             child: ListTile(
               leading: Icon(Icons.exit_to_app, color: Colors.black),
               title: Text(
                 'Déconnexion'.tr,
-                style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: Colors.black),
+                style: TextStyle(
+                    fontSize: 16, fontFamily: 'Poppins', color: Colors.black),
               ),
             ),
           ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:test2/routes/routes_helper.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
 import 'package:test2/views/login/login_ui.dart';
 
@@ -68,7 +70,6 @@ class Inscription extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 50),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -81,10 +82,7 @@ class Inscription extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginUI()),
-                      );
+                      Get.toNamed(RouteHelper.signIn);
                     },
                     child: Text(
                       "Se connecter",

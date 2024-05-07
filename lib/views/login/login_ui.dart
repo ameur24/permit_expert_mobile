@@ -5,10 +5,11 @@ import '../../widgets/my_botton/my_button.dart';
 import '../sign_up/mdpOublie.dart';
 import '../sign_up/sign_up.dart';
 
-class LoginUI extends StatelessWidget {
-  final AuthController authController = Get.put(AuthController());
+class LoginUI extends GetView<AuthController> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  LoginUI({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +72,7 @@ class LoginUI extends StatelessWidget {
                         fillColor: Colors.white,
                         prefixIcon: Icon(Icons.person, color: Colors.grey),
                         contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       ),
                     ),
                   ),
@@ -101,7 +102,7 @@ class LoginUI extends StatelessWidget {
                         fillColor: Colors.white,
                         prefixIcon: Icon(Icons.lock, color: Colors.grey),
                         contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       ),
                       obscureText: true,
                     ),
@@ -122,7 +123,8 @@ class LoginUI extends StatelessWidget {
                   const SizedBox(height: 26),
                   MyButton(
                     onPressed: () {
-                      authController.login(emailController.text, passwordController.text);
+                      controller.login(
+                          emailController.text, passwordController.text);
                     },
                     txt: 'Se connecter',
                   ),
@@ -139,7 +141,8 @@ class LoginUI extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Get.to(SignUp()); // Utilisation de GetX pour la navigation
+                          Get.to(
+                              SignUp()); // Utilisation de GetX pour la navigation
                         },
                         child: Text(
                           "S'inscrire",

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:test2/routes/routes_helper.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
 import 'package:test2/views/login/login_ui.dart';
 
@@ -68,7 +70,7 @@ class SignUp extends StatelessWidget {
                         fillColor: Colors.white,
                         prefixIcon: Icon(Icons.person, color: Colors.grey),
                         contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       ),
                     ),
                   ),
@@ -79,7 +81,8 @@ class SignUp extends StatelessWidget {
                       print("Le bouton 'Se Connecter' a été pressé !");
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => VerificationScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => VerificationScreen()),
                       );
                     },
                   ),
@@ -96,10 +99,7 @@ class SignUp extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LoginUI()),
-                          );
+                          Get.toNamed(RouteHelper.signIn);
                         },
                         child: Text(
                           "Se connecter",
