@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:test2/routes/routes_helper.dart';
-import 'package:test2/views/onboarding//onboarding_view.dart';
-import 'package:test2/views/login/login_ui.dart';
+
 import 'helper/dependencies.dart' as dep;
 
 import 'fr.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('fr_FR', null);
   await dep.init();
   await GetStorage.init();
   runApp(const MyApp());
@@ -34,7 +35,6 @@ class MyApp extends StatelessWidget {
       initialRoute: isFirstTime
           ? RouteHelper.getOnBoarding()
           : RouteHelper.getSignInPage(),
-      home: isFirstTime ? const OnboardingView() : LoginUI(),
     );
   }
 }

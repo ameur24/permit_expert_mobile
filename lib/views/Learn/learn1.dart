@@ -1,160 +1,108 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Learn/learn3.dart';
-import 'package:test2/views/Learn/learn4.dart';
-import 'package:test2/views/Learn/learn5.dart';
+import 'package:test2/views/profile/profilep1.dart';
 
-import '../../widgets/container/greycontainer.dart';
+import '../../routes/routes_helper.dart';
+import '../../widgets/container/greencontainer.dart';
+import '../../widgets/container/learnContainer.dart';
+import '../../widgets/container/vidcontainer.dart';
 import '../Notification/list_notifications.dart';
-import '../profile/profilep1.dart';
-import '../Notification/notification.dart';
-import 'learn2.dart';
 
-class LearnScreen extends StatelessWidget {
+class MyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Apprendre_le_code'.tr,
-          style: TextStyle(fontSize: 17, fontFamily: 'Poppins'),
-        ),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(ListNotifications());
+              Get.toNamed(RouteHelper.notifications);
+
+             // Get.to(ListNotifications());
             },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to(ProfilePage());
+              Get.toNamed(RouteHelper.profile);
+            //  Get.to(ProfilePage());
             },
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: 330,
-              height: 181,
-              margin: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.lightGreen,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 78),
-                  child: Image.asset(
-                    'assets/images/Capture_d_écran_2024-04-17_155431-removebg-preview.png',
-                    width: 700,
-                    height: 133,
-                  ),
-                ),
-              ),
-            ),
-            _buildCustomContainerWithProgress(
-              'Série_nb'.tr+' 1',
-              'Règles_en_Route'.tr,
-              'assets/images/24 1.png',
-              60,
-              onPressed: () {
-                Get.to(MyScreen());
-              },
-            ),
-            _buildCustomContainerWithProgress(
-              'Série_nb'.tr+' 2',
-              'Sur_la_Voie_de_la_Sécurité'.tr,
-              'assets/images/26-removebg-preview 1.png',
-              30,
-              onPressed: () {
-                Get.to(MyScreen1());
-              },
-            ),
-            _buildCustomContainerWithProgress(
-              'Série_nb'.tr+' 3',
-              'Les_Signaux_de_la_Route'.tr,
-              'assets/images/27-removebg-preview 1.png',
-              80,
-              onPressed: () {
-                Get.to(MyScreen2());
-              },
-            ),
-            _buildCustomContainerWithProgress(
-              'Série_nb'.tr+' 4',
-              'Conduite_Maitrisée'.tr,
-              'assets/images/may-removebg-preview 1.png',
-              40,
-              onPressed: () {
-                Get.to(MyScreen3());
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCustomContainerWithProgress(
-      String text,
-      String subtitle,
-      String imagePath,
-      int percent, {
-        Function()? onPressed,
-      }) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              CustomContainer(
-                text: text,
-                subtitle: subtitle,
-                imagePath: imagePath,
-              ),
-              SizedBox(height: 10),
+          SizedBox(height: 30),
+          GreenContainer(
+            titre:  'Série_nb'.tr+' 1',
+
+            sousTitre: 'Règles_en_Route'.tr,
+            imageUrl: "assets/images/24 1.png",
+            imageWidth: 150,
+            imageHeight: 150,
+          ),
+          SizedBox(height: 10),
+          LearnContainer(
+            containerWidth: 325,
+            containerHeight: 111,
+            barWidth: 2,
+            barHeight: 70,
+            title: 'Voici_une_ressource_qui_peut_vous_aider:'.tr,
+            link: "https://www.ressource.com/", // Ajoutez le lien ici
+          ),
+          SizedBox(height: 10),
+          LearnContainer(
+            containerWidth: 330,
+            containerHeight: 111,
+            barWidth: 2,
+            barHeight: 75,
+            title: 'Voici_un_test_en_ligne_qui_peut_vous_aider:'.tr,
+            link: "https://www.permisecole.com/code/gratuit", // Ajoutez le lien ici
+          ),
+          SizedBox(height: 10),
+          VContainer(
+            containerWidth: 325,
+            containerHeight: 260,
+            barWidth: 2,
+            barHeight: 228,
+            title: 'Voici_quelques_vidéos_qui_peuvent_vous_aider:'.tr,
+            imagePaths: [
+              'assets/images/vid1.png',
+              'assets/images/vid1.png',
+              'assets/images/vid1.png',
+
+              'assets/images/vid1.png',
+              'assets/images/vid1.png',
+              'assets/images/vid1.png',
             ],
-          ),
-          Positioned(
-            bottom: 20,
-            right: 100,
-            child: Container(
-              width: 220,
-              height: 8,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: percent,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                        ),
-                        color: Colors.green,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 100 - percent,
-                    child: Container(),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 16,
-            right: 67,
-            child: Text('$percent%', style: TextStyle(fontSize: 12, color: Colors.grey)),
+            imageUrls: [
+              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
+              'https://www.url2.com',
+              'https://www.url3.com',
+
+              'https://www.url4.com',
+              'https://www.url5.com',
+              'https://www.url6.com',
+            ],
+            imageWidths: [
+              82,
+              82,
+              82,
+
+              82,
+              82,
+              82,
+            ],
+            imageHeights: [
+              68,
+              68,
+              68,
+
+              68,
+              68,
+              68,
+            ],
           ),
         ],
       ),

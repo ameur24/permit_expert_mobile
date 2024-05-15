@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:test2/views/Notification/notification.dart';
 import 'package:test2/views/profile/profilep1.dart';
 
+import '../../routes/routes_helper.dart';
 import '../../widgets/container/greencontainer.dart';
 import '../../widgets/container/learnContainer.dart';
 import '../../widgets/container/vidcontainer.dart';
 import '../Notification/list_notifications.dart';
 
-class MyScreen2 extends StatelessWidget {
+class MyScreen3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,9 @@ class MyScreen2 extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to(ProfilePage());
+              Get.toNamed(RouteHelper.profile);
+
+              //Get.to(ProfilePage());
             },
           ),
         ],
@@ -32,9 +35,9 @@ class MyScreen2 extends StatelessWidget {
         children: [
           SizedBox(height: 30),
           GreenContainer(
-            titre:  'Série_nb'.tr+' 3',
-            sousTitre:  'Les_Signaux_de_la_Route'.tr,
-            imageUrl: "assets/images/may-removebg-preview 1.png",
+            titre:  'Série_nb'.tr+' 4',
+            sousTitre:  'Conduite_Maitrisée'.tr,
+            imageUrl: "assets/images/27-removebg-preview 1.png",
             imageWidth: 150,
             imageHeight: 150,
           ),
@@ -44,7 +47,7 @@ class MyScreen2 extends StatelessWidget {
             containerHeight: 111,
             barWidth: 2,
             barHeight: 70,
-            title: 'Voici_une_ressource_qui_peut_vous_aider:'.tr,
+            title: "Voici une ressource qui peut vous aider:",
             link: "https://www.ressource.com/",
           ),
           SizedBox(height: 10),
@@ -62,6 +65,7 @@ class MyScreen2 extends StatelessWidget {
             containerHeight: 260,
             barWidth: 2,
             barHeight: 228,
+
             title: 'Voici_quelques_vidéos_qui_peuvent_vous_aider:'.tr,
             imagePaths: [
               'assets/images/vid1.png',

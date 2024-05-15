@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Notification/notification.dart';
-import 'package:test2/views/profile/profilep1.dart';
 
+import '../routes/routes_helper.dart';
 import '../widgets/my_botton/my_button.dart';
-import 'Notification/list_notifications.dart';
 
 class MessageScreen extends StatelessWidget {
   @override
@@ -21,14 +19,16 @@ class MessageScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(ListNotifications());
+              Get.toNamed(RouteHelper.notifications);
 
             },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to(ProfilePage());
+              Get.toNamed(RouteHelper.profile);
+
+
             },
           ),
         ],

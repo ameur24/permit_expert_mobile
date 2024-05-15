@@ -2,11 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:test2/views/Notification/notification.dart';
 import 'package:test2/views/profile/profilep1.dart';
-
+import '../../routes/routes_helper.dart';
 import '../../widgets/my_botton/my_button.dart';
-import '../Notification/list_notifications.dart';
 
 class ProfilePage2 extends StatefulWidget {
   @override
@@ -46,7 +44,8 @@ class _ProfilePageState extends State<ProfilePage2> {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(ListNotifications());
+              Get.toNamed(RouteHelper.notifications);
+
             },
           ),
         ],

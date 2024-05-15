@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test2/routes/routes_helper.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
-import 'package:test2/views/login/login_ui.dart';
 
-class Inscription extends StatelessWidget {
-  const Inscription({Key? key});
+import '../../data/controllers/signup_controller.dart';
+
+class Inscription extends GetView<SignUpController> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Inscription({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,88 +16,141 @@ class Inscription extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/Permit_3__4-removebg-preview.png",
-                height: 147,
-                width: 171,
-              ),
-              const SizedBox(height: 32),
-              Text(
-                "Inscription",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontFamily: 'poppins',
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/Permit_3__4-removebg-preview.png",
+                  height: 147,
+                  width: 171,
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "Remplissez le formulaire pour continuer",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 32),
-              buildShadowedTextField(
-                hintText: 'Nom d\'utilisateur',
-                prefixIcon: Icons.person,
-              ),
-              const SizedBox(height: 10),
-              buildShadowedTextField(
-                hintText: 'Numéro de téléphone',
-                prefixIcon: Icons.phone,
-              ),
-              const SizedBox(height: 10),
-              buildShadowedTextField(
-                hintText: 'Mot de passe',
-                prefixIcon: Icons.lock,
-                isPassword: true,
-              ),
-              const SizedBox(height: 10),
-              buildShadowedTextField(
-                hintText: 'Confirmer votre mot de passe',
-                prefixIcon: Icons.lock,
-                isPassword: true,
-              ),
-              const SizedBox(height: 32),
-              MyButton(
-                txt: "Continue",
-                onPressed: () {
-                  print("Le bouton 'Continue' a été pressé !");
-                },
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Vous avez déjà un compte ?",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                const SizedBox(height: 32),
+                Text(
+                  "Inscription",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontFamily: 'poppins',
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Get.toNamed(RouteHelper.signIn);
-                    },
-                    child: Text(
-                      "Se connecter",
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Remplissez le formulaire pour continuer",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                buildShadowedTextField(
+                  controller: controller.usernameController,
+                  hintText: 'Nom d\'utilisateur',
+                  prefixIcon: Icons.person,
+                  textInputType: TextInputType.text,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Le champ nom d\'utilisateur est obligatoire';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                buildShadowedTextField(
+                  hintText: 'Numéro de téléphone',
+                  prefixIcon: Icons.phone,
+                  textInputType: TextInputType.number,
+                  controller: controller.phoneController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Le champ numéro de téléphone est obligatoire';
+                    }
+                    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                      return 'Le numéro de téléphone ne doit contenir que des chiffres';
+                    }
+                    if (value.length > 8) {
+                      return 'Le numéro de téléphone ne doit pas dépasser 8 caractères';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                buildShadowedTextField(
+                  hintText: 'Mot de passe',
+                  prefixIcon: Icons.lock,
+                  textInputType: TextInputType.text,
+                  isPassword: true,
+                  controller: controller.passwordController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Le champ mot de passe est obligatoire';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                buildShadowedTextField(
+                  hintText: 'Confirmer votre mot de passe',
+                  prefixIcon: Icons.lock,
+                  textInputType: TextInputType.text,
+                  isPassword: true,
+                  controller: controller.confirmPasswordController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Le champ de confirmation du mot de passe est obligatoire';
+                    }
+                    if (value != controller.passwordController.text) {
+                      return 'Les mots de passe ne correspondent pas';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 32),
+                MyButton(
+                  txt: "S'inscrire",
+                  onPressed: () {
+                    if (_validate()) {
+                      controller.updateProfile(
+                        controller.emailController.text,
+                        controller.usernameController.text,
+                        controller.phoneController.text,
+                        controller.passwordController.text,
+                        controller.confirmPasswordController.text,
+                      );
+                      print("Le bouton 'Continue' a été pressé !");
+                    }
+                  },
+                ),
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Vous avez déjà un compte ?",
                       style: TextStyle(
-                        color: Colors.orange,
                         fontSize: 14,
+                        color: Colors.grey,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    TextButton(
+                      onPressed: () {
+                        Get.toNamed(RouteHelper.signIn);
+                      },
+                      child: Text(
+                        "Se connecter'",
+                        style: TextStyle(
+                          color: Colors.orange,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -102,9 +158,12 @@ class Inscription extends StatelessWidget {
   }
 
   Widget buildShadowedTextField({
+    required TextEditingController controller,
     required String hintText,
+     TextInputType textInputType = TextInputType.text,
     required IconData prefixIcon,
     bool isPassword = false,
+    required String? Function(String?)? validator,
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -118,8 +177,12 @@ class Inscription extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
+        controller: controller,
         obscureText: isPassword,
+        validator: validator,
+        textInputAction: TextInputAction.next,
+        keyboardType: textInputType,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey),
@@ -134,5 +197,12 @@ class Inscription extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool _validate() {
+    if (_formKey.currentState!.validate()) {
+      return true;
+    }
+    return false;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:test2/routes/routes_helper.dart';
 
 import '../../contants.dart';
 
@@ -79,6 +80,19 @@ class ApiClient extends GetConnect implements GetxService {
       return Response(statusCode: 1, statusText: e.toString());
     }
   }
+
+  Future<Response> putData(String uri, dynamic body) async {
+    try {
+      Response response = await put(uri, body, headers: _mainHeaders).then((value) {
+        notAuthenticated(value, uri);
+        return value;
+      });
+      return response;
+    } catch (e) {
+      return Response(statusCode: 1, statusText: e.toString());
+    }
+  }
+
   Future<Response> deleteData(String uri, dynamic body) async {
     try {
       Response response =
@@ -93,14 +107,17 @@ class ApiClient extends GetConnect implements GetxService {
   }
   void notAuthenticated(Response<dynamic> res, String uri) {
  if (res.statusCode == 401) {
+       print("User is not authenticated.");
      //TODO : test if user is not authorized
+   Get.offAllNamed(RouteHelper.getSignInPage());
       }
-      if (res.statusCode == 406 || res.statusCode == 422) {
-        return;
-      } else if (res.statusCode != 200 && res.statusCode != 201) {
+       else if (res.statusCode != 200 && res.statusCode != 201) {
+
+        print("Server error: ${res.statusCode}");
         //TODO : test if there's any other type of exception
       }
     }
+
   }
 
 

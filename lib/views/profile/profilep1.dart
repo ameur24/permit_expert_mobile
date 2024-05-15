@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:test2/routes/routes_helper.dart';
-import 'package:test2/views/Notification/notification.dart';
 import 'package:test2/views/profile/profilep2.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
 
 import '../Notification/list_notifications.dart';
-import '../login/login_ui.dart';
 import '../parametre.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -47,7 +45,9 @@ class _ProfilePageState extends State<ProfilePage> {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(ListNotifications());
+              Get.toNamed(RouteHelper.notifications);
+
+              // Get.to(ListNotifications());
             },
           ),
         ],
@@ -126,14 +126,16 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           SizedBox(height: 23),
 
-          // Bouton "Modifier"
+
           Container(
             width: 328,
             height: 45,
             child: MyButton(
               txt: 'Modifier'.tr,
               onPressed: () {
-                Get.to(ProfilePage2());
+                Get.toNamed(RouteHelper.editProfile);
+
+               // Get.to(ProfilePage2());
               },
             ),
           ),
@@ -145,7 +147,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           GestureDetector(
             onTap: () {
-              Get.to(ParametresPage());
+              Get.toNamed(RouteHelper.parameter);
+
+              //Get.to(ParametresPage());
             },
             child: ListTile(
               leading: Icon(Icons.settings, color: Colors.black),

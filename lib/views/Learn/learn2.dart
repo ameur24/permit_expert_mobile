@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Notification/notification.dart';
 import 'package:test2/views/profile/profilep1.dart';
-
+import '../../routes/routes_helper.dart';
 import '../../widgets/container/greencontainer.dart';
 import '../../widgets/container/learnContainer.dart';
 import '../../widgets/container/vidcontainer.dart';
 import '../Notification/list_notifications.dart';
 
-class MyScreen extends StatelessWidget {
+class MyScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,13 +16,16 @@ class MyScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(ListNotifications());
+              Get.toNamed(RouteHelper.notifications);
+
+             // Get.to(ListNotifications());
             },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to(ProfilePage());
+              Get.toNamed(RouteHelper.profile);
+            //  Get.to(ProfilePage());
             },
           ),
         ],
@@ -32,10 +34,9 @@ class MyScreen extends StatelessWidget {
         children: [
           SizedBox(height: 30),
           GreenContainer(
-            titre:  'Série_nb'.tr+' 1',
-
-            sousTitre: 'Règles_en_Route'.tr,
-            imageUrl: "assets/images/24 1.png",
+            titre:  'Série_nb'.tr+' 2',
+            sousTitre: 'Sur_la_Voie_de_la_Sécurité'.tr,
+            imageUrl: "assets/images/26-removebg-preview 1.png",
             imageWidth: 150,
             imageHeight: 150,
           ),
@@ -77,7 +78,6 @@ class MyScreen extends StatelessWidget {
               'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
               'https://www.url2.com',
               'https://www.url3.com',
-
               'https://www.url4.com',
               'https://www.url5.com',
               'https://www.url6.com',

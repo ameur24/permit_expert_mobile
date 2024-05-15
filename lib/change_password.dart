@@ -18,13 +18,16 @@ class ChangePasswordScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 130, left: 15),
-              child: Text(
-                'Mot de passe actuelle  :',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF707070),
-                  fontFamily: 'poppins',
+              padding: const EdgeInsets.only(top: 115, left: 15),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 19),
+                child: Text(
+                  'Mot de passe actuelle  :',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF707070),
+                    fontFamily: 'poppins',
+                  ),
                 ),
               ),
             ),
@@ -33,16 +36,19 @@ class ChangePasswordScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: InputBoxContainer(
-                hintText: 'Mot de passe actuelle',
-                iconColor: Color(0xFFA8AFB9),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: InputBoxContainer(
+                  hintText: 'Mot de passe actuelle',
+                  iconColor: Color(0xFFA8AFB9),
+                ),
               ),
             ),
             SizedBox(
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(left: 32),
               child: Text(
                 'Nouveau mot de passe:',
                 style: TextStyle(
@@ -57,9 +63,12 @@ class ChangePasswordScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: InputBoxContainer(
-                hintText: 'Nouveau mot de passe',
-                iconColor: Color(0xFFA8AFB9),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: InputBoxContainer(
+                  hintText: 'Nouveau mot de passe',
+                  iconColor: Color(0xFFA8AFB9),
+                ),
               ),
             ),
             SizedBox(
@@ -67,12 +76,15 @@ class ChangePasswordScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15),
-              child: Text(
-                'Confirmer mot de passe:',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF707070),
-                  fontFamily: 'poppins',
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: Text(
+                  'Confirmer mot de passe:',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF707070),
+                    fontFamily: 'poppins',
+                  ),
                 ),
               ),
             ),
@@ -81,9 +93,12 @@ class ChangePasswordScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: InputBoxContainer(
-                hintText: 'Confirmer mot de passe',
-                iconColor: Color(0xFFA8AFB9),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: InputBoxContainer(
+                  hintText: 'Confirmer mot de passe',
+                  iconColor: Color(0xFFA8AFB9),
+                ),
               ),
             ),
             SizedBox(height: 70),
@@ -93,7 +108,7 @@ class ChangePasswordScreen extends StatelessWidget {
               width: 329,
               height: 50,
               child: Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 50),
                 child: MyButton(
                   txt: 'Enregistrer',
                   onPressed: () {

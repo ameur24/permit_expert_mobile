@@ -22,7 +22,7 @@ class CustomContainer extends StatelessWidget {
       onTap: onPressed,
       child: Container(
       child: Container(
-        width: 172,
+        width: 183,
         height: 261,
         decoration: BoxDecoration(
           color: color,

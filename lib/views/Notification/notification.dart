@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../routes/routes_helper.dart';
 import '../profile/profilep1.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -18,7 +19,9 @@ class NotificationsScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to(ProfilePage());
+              Get.toNamed(RouteHelper.profile);
+
+              //Get.to(ProfilePage());
               },
           ),
         ],

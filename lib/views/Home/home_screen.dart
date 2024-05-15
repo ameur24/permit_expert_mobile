@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:test2/routes/routes_helper.dart';
 import 'package:test2/views/Notification/notification.dart';
-import 'package:test2/views/calendar/calendar.dart';
 import '../../widgets/container/CustomContainer.dart';
-import '../Learn/learn1.dart';
+import '../Learn/learn_screen.dart';
 import '../MessageScreen.dart';
 import '../Paiement/paiement_screen.dart';
 import '../calendar/calendar_event.dart';
@@ -18,13 +18,17 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-             Get.to( NotificationsScreen());
+              Get.toNamed(RouteHelper.notifications);
+            // Get.to( NotificationsScreen());
              },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to( ProfilePage());            },
+              Get.toNamed(RouteHelper.profile);
+
+            }
+              //Get.to( ProfilePage());            },
           ),
         ],
 
@@ -62,7 +66,8 @@ class HomeScreen extends StatelessWidget {
                   imagePath: 'assets/images/capture_d___cran_2024-04-14_233651-removebg-preview_480 1.png', // Chemin de l'image du premier conteneur
                   text: 'Consulter_le_calendrier'.tr,
                   onPressed: (){
-                    Get.to(CalendarScreen2());
+                    Get.toNamed(RouteHelper.calendarEvent);
+                    //Get.to(CalendarScreen2());
                   }, imageWidth: 53,
                   imageHeight: 72,
 
@@ -74,7 +79,9 @@ class HomeScreen extends StatelessWidget {
                   imagePath: 'assets/images/capture_d___cran_2024-04-15_001601-removebg-preview_480 1.png', // Chemin de l'image du deuxième conteneur
                   text: 'Apprendre_le_code'.tr,
                   onPressed: (){
-                    Get.to(LearnScreen());
+                    Get.toNamed(RouteHelper.learnCode);
+
+                    //Get.to(LearnScreen());
                   }, imageWidth: 123,
                   imageHeight: 69,
                 ),
@@ -91,7 +98,8 @@ class HomeScreen extends StatelessWidget {
                   imagePath: 'assets/images/capture_d___cran_2024-04-15_001139-removebg-preview_480 1.png', // Chemin de l'image du troisième conteneur
                   text: "Consulter_l'historique_de_paiement".tr,
                   onPressed: (){
-                    Get.to(PaymentScreen());
+                    Get.toNamed(RouteHelper.payment);
+                   // Get.to(PaymentScreen());
 
                   }, imageWidth: 125,
                   imageHeight: 99,
@@ -104,7 +112,9 @@ class HomeScreen extends StatelessWidget {
                   imagePath: 'assets/images/Capture_d_écran_2024-04-14_233103-removebg-preview 1.png', // Chemin de l'image du quatrième conteneur
                   text: 'Laisser_un_message'.tr,
                   onPressed: (){
-                    Get.to(MessageScreen());
+                    Get.toNamed(RouteHelper.contact);
+
+                   // Get.to(MessageScreen());
                   },
                   imageWidth: 92,
                   imageHeight: 69,

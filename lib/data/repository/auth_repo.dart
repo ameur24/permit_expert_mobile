@@ -11,6 +11,7 @@ class AuthentificationRepo extends GetxService {
 
 
   Future<Response> login(Map body) async {
-    return await apiClient.postData("/login", body);
+    return await apiClient.postData("/api/login", body);
   }
+
 }

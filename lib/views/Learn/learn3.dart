@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Notification/notification.dart';
 import 'package:test2/views/profile/profilep1.dart';
+
+import '../../routes/routes_helper.dart';
 import '../../widgets/container/greencontainer.dart';
 import '../../widgets/container/learnContainer.dart';
 import '../../widgets/container/vidcontainer.dart';
 import '../Notification/list_notifications.dart';
 
-class MyScreen1 extends StatelessWidget {
+class MyScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,13 +17,17 @@ class MyScreen1 extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(ListNotifications());
+              Get.toNamed(RouteHelper.notifications);
+
+             // Get.to(ListNotifications());
             },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to(ProfilePage());
+              Get.toNamed(RouteHelper.profile);
+
+            //  Get.to(ProfilePage());
             },
           ),
         ],
@@ -31,9 +36,9 @@ class MyScreen1 extends StatelessWidget {
         children: [
           SizedBox(height: 30),
           GreenContainer(
-            titre:  'Série_nb'.tr+' 2',
-            sousTitre: 'Sur_la_Voie_de_la_Sécurité'.tr,
-            imageUrl: "assets/images/26-removebg-preview 1.png",
+            titre:  'Série_nb'.tr+' 3',
+            sousTitre:  'Les_Signaux_de_la_Route'.tr,
+            imageUrl: "assets/images/may-removebg-preview 1.png",
             imageWidth: 150,
             imageHeight: 150,
           ),
@@ -44,7 +49,7 @@ class MyScreen1 extends StatelessWidget {
             barWidth: 2,
             barHeight: 70,
             title: 'Voici_une_ressource_qui_peut_vous_aider:'.tr,
-            link: "https://www.ressource.com/", // Ajoutez le lien ici
+            link: "https://www.ressource.com/",
           ),
           SizedBox(height: 10),
           LearnContainer(
@@ -53,7 +58,7 @@ class MyScreen1 extends StatelessWidget {
             barWidth: 2,
             barHeight: 75,
             title: 'Voici_un_test_en_ligne_qui_peut_vous_aider:'.tr,
-            link: "https://www.permisecole.com/code/gratuit", // Ajoutez le lien ici
+            link: "https://www.permisecole.com/code/gratuit",
           ),
           SizedBox(height: 10),
           VContainer(
@@ -73,11 +78,12 @@ class MyScreen1 extends StatelessWidget {
             ],
             imageUrls: [
               'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
-              'https://www.url2.com',
-              'https://www.url3.com',
-              'https://www.url4.com',
-              'https://www.url5.com',
-              'https://www.url6.com',
+              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
+              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
+
+              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
+              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
+              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
             ],
             imageWidths: [
               82,

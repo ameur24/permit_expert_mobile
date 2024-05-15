@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Notification/notification.dart';
-import 'package:test2/views/profile/profilep1.dart';
-
+import '../../routes/routes_helper.dart';
 import '../../widgets/container/PaiementContainer.dart';
-import '../Notification/list_notifications.dart';
 
 class PaymentScreen extends StatelessWidget {
   @override
@@ -28,13 +25,16 @@ class PaymentScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              Get.to(ListNotifications());
+              Get.toNamed(RouteHelper.notifications);
+
             },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Get.to(ProfilePage());
+              Get.toNamed(RouteHelper.profile);
+
+
             },
           ),
         ],
@@ -164,7 +164,7 @@ class PaymentScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 25),
                   child: Text(
                     'Historique de paiement',
                     style: TextStyle(
@@ -176,18 +176,21 @@ class PaymentScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Action à définir
+
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.transparent,
                   ),
-                  child: Text(
-                    'Voir Tous',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
-                      color: Color(0xFFFA7F35),
-                      decoration: TextDecoration.underline,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 18),
+                    child: Text(
+                      'Voir Tous',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        color: Color(0xFFFA7F35),
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 ),
