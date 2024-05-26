@@ -4,11 +4,21 @@ class EventContainer extends StatelessWidget {
   final String date;
   final String title;
   final String subtitle;
+  final String acceptButtonText;
+  final String rejectButtonText;
+  final VoidCallback onAcceptPressed;
+  final VoidCallback onRejectPressed;
+  final bool showButtons;
 
   EventContainer({
     required this.date,
     required this.title,
     required this.subtitle,
+    required this.acceptButtonText,
+    required this.rejectButtonText,
+    required this.onAcceptPressed,
+    required this.onRejectPressed,
+    this.showButtons = true,
   });
 
   @override
@@ -16,7 +26,7 @@ class EventContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: Container(
-        width: 350,
+        width: 360,
         height: 105,
         decoration: BoxDecoration(
           border: Border.all(color: Color(0xFF8F9BB3)),
@@ -67,12 +77,12 @@ class EventContainer extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
+            if (showButtons) Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 10,top: 5),
+                  padding: const EdgeInsets.only(right: 10, top: 5),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: onAcceptPressed,
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xFF9DCD5A),
                       shape: RoundedRectangleBorder(
@@ -80,7 +90,7 @@ class EventContainer extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Accepter',
+                      acceptButtonText,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -91,7 +101,7 @@ class EventContainer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: onRejectPressed,
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xFFFA7F35),
                       shape: RoundedRectangleBorder(
@@ -99,7 +109,7 @@ class EventContainer extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Refuser',
+                      rejectButtonText,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,

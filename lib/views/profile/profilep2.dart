@@ -1,35 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:test2/views/profile/profilep1.dart';
+import '../../data/controllers/edit_profile_controller.dart';
 import '../../routes/routes_helper.dart';
 import '../../widgets/my_botton/my_button.dart';
 
-class ProfilePage2 extends StatefulWidget {
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage2> {
-  File? _image;
-  final picker = ImagePicker();
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
+class ProfilePage2 extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,133 +20,137 @@ class _ProfilePageState extends State<ProfilePage2> {
             icon: Icon(Icons.notifications),
             onPressed: () {
               Get.toNamed(RouteHelper.notifications);
-
             },
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: getImage,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 0,),
-                child: Container(
-                  width: 152,
-                  height: 152,
-                  margin: EdgeInsets.only(top: AppBar().preferredSize.height + MediaQuery.of(context).padding.top - 10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Stack(
-                    children: [
-                      if (_image != null)
-                        ClipOval(
-                          child: Image.file(
-                            _image!,
-                            fit: BoxFit.cover,
-                            width: 152,
-                            height: 152,
-                          ),
-                        ),
-                      if (_image == null)
-                        Center(
-                          child: Icon(
-                            Icons.account_circle,
-                            size: 160,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      Positioned(
-                        bottom: 8,
-                        right: 12,
-                        child: GestureDetector(
-                          onTap: getImage,
-                          child: Container(
-                            padding: EdgeInsets.all(7),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black, width: 1),
-                              color: Colors.white,
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              size: 12,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: controller.getImage,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                    child: Container(
+                      width: 152,
+                      height: 152,
+                      margin: EdgeInsets.only(
+                          top: AppBar().preferredSize.height + MediaQuery.of(context).padding.top - 10),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
                       ),
-                    ],
+                      child: Stack(
+                        children: [
+                          if (controller.image.value != null)
+                            ClipOval(
+                              child: Image.file(
+                                controller.image.value!,
+                                fit: BoxFit.cover,
+                                width: 152,
+                                height: 152,
+                              ),
+                            ),
+                          if (controller.image.value == null)
+                            Center(
+                              child: Icon(
+                                Icons.account_circle,
+                                size: 160,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          Positioned(
+                            bottom: 8,
+                            right: 12,
+                            child: GestureDetector(
+                              onTap: controller.getImage,
+                              child: Container(
+                                padding: EdgeInsets.all(7),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.black, width: 1),
+                                  color: Colors.white,
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  size: 12,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  hintText: 'Nom utilisateur',
-                  hintStyle: TextStyle(fontSize: 12, color: Color(0xFF4F4F51)),
-                  border: UnderlineInputBorder(),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextFormField(
+                    controller: controller.userNameController,
+                    decoration: InputDecoration(
+                      hintText: 'Nom utilisateur',
+                      hintStyle: TextStyle(fontSize: 12, color: Color(0xFF4F4F51)),
+                      border: UnderlineInputBorder(),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  hintText: 'Date de naissance',
-                  hintStyle: TextStyle(fontSize: 12, color: Color(0xFF4F4F51)),
-                  border: UnderlineInputBorder(),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextFormField(
+                    controller: controller.dateNaissanceController,
+                    decoration: InputDecoration(
+                      hintText: 'Date de naissance',
+                      hintStyle: TextStyle(fontSize: 12, color: Color(0xFF4F4F51)),
+                      border: UnderlineInputBorder(),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  hintText: 'Email',
-                  hintStyle: TextStyle(fontSize: 12, color: Color(0xFF4F4F51)),
-                  border: UnderlineInputBorder(),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextFormField(
+                    controller: controller.emailController,
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      hintStyle: TextStyle(fontSize: 12, color: Color(0xFF4F4F51)),
+                      border: UnderlineInputBorder(),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  hintText: 'Numéro de téléphone',
-                  hintStyle: TextStyle(fontSize: 12, color: Color(0xFF4F4F51)),
-                  border: UnderlineInputBorder(),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextFormField(
+                    controller: controller.numTelController,
+                    decoration: InputDecoration(
+                      hintText: 'Numéro de téléphone',
+                      hintStyle: TextStyle(fontSize: 12, color: Color(0xFF4F4F51)),
+                      border: UnderlineInputBorder(),
+                    ),
+                  ),
                 ),
-              ),
+                SizedBox(height: 70),
+                Container(
+                  width: 328,
+                  height: 50,
+                  child: MyButton(
+                    txt: 'Enregistrer',
+                    onPressed: () {
+                      controller.updateProfile();
+                    },
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 70),
-
-            // Bouton "Modifier"
-            Container(
-              width: 328,
-              height: 50,
-              child: MyButton(
-                txt: 'Enregistrer',
-                onPressed: () {
-                  Get.to(ProfilePage());
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+          );
+        }
+      }),
     );
   }
 }

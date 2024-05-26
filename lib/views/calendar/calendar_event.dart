@@ -62,6 +62,10 @@ class CalendarScreen2 extends GetView<CalendarController> {
                         color: Colors.lightGreen,
                       ),
                       selectedTextStyle: TextStyle(color: Colors.white),
+                      markerDecoration: BoxDecoration(
+                        color: Colors.orange,
+                        shape: BoxShape.circle,
+                      ),
                     ),
                     headerStyle: HeaderStyle(
                       formatButtonVisible: false,
@@ -76,11 +80,13 @@ class CalendarScreen2 extends GetView<CalendarController> {
                       titleTextFormatter: (date, locale) {
                         String monthText = DateFormat.MMMM(locale).format(date);
                         String yearText = DateFormat.y(locale).format(date);
-                        return '${monthText[0].toUpperCase()}${monthText.substring(1)}\n' +
-                            '$yearText';
+                        return '${monthText[0].toUpperCase()}${monthText.substring(1)}\n$yearText';
                       },
                       headerMargin: EdgeInsets.only(bottom: 5, top: 10),
                     ),
+                    eventLoader: (day) {
+                      return controller.eventDays.contains(day) ? ['event'] : [];
+                    },
                   ),
                 ),
               ],
@@ -88,37 +94,84 @@ class CalendarScreen2 extends GetView<CalendarController> {
           ),
           Expanded(
             child: Obx(
-                  () => controller.seances.isEmpty
-                  ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Aucun événement',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Image.asset(
-                    'assets/images/sarra2-removebg-preview.png',
-                    width: 300,
-                    height: 300,
-                  ),
-                ],
-              )
-                  : ListView.builder(
-                itemCount: controller.seances.length,
-                itemBuilder: (context, index) {
-                  final seance = controller.seances[index];
-                  return EventContainer(
-                    date: '${seance.heureDebut}-${seance.heureFin}',
-                    title: seance.type,
-                    subtitle: 'Vous pouvez choisir entre accepter et refuser.',
+                  () {
+                if (controller.seances.isEmpty && controller.examens.isEmpty) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Aucun événement',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Image.asset(
+                        'assets/images/sarra2-removebg-preview.png',
+                        width: 300,
+                        height: 300,
+                      ),
+                    ],
                   );
-                },
-              ),
+                } else {
+                  return ListView(
+                    children: [
+                      ...controller.seances.map((seance) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                          child: EventContainer(
+                            date: '${seance.heureD}-${seance.heureF}',
+                            title: "Séance " + seance.type,
+                            subtitle: 'Vous pouvez choisir entre accepter et refuser.',
+                          acceptButtonText: 'AccepterS',
+                            rejectButtonText: 'RefuserS',
+                            onAcceptPressed: () {
+                              controller.acceptSeance(seance.id);
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                Get.snackbar('Accepter Séance', "votre séance a été acceptée");
+                              });
+                            },
+                            onRejectPressed: () {
+                              controller.RefuserSeance(seance.id);
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                Get.snackbar('Refuser Séance', "votre séance a été refuséé");
+                              });
+                            },
+                          ),
+                        );
+                      }).toList(),
+                      ...controller.examens.map((examen) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                          child: EventContainer(
+                            date: '${examen.heureD}-${examen.heureF}',
+                            title: "Examen " + examen.type,
+                            subtitle: 'Vous pouvez choisir entre accepter et refuser.',
+                            acceptButtonText: 'AccepterE',
+                            rejectButtonText: 'RefuserE',
+
+                            onAcceptPressed: () {
+                              controller.acceptExamen(examen.id);
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                Get.snackbar('Accepter Examen', "votre examen a été acceptée");
+                              });
+                             bool value=true;
+                            },
+                            onRejectPressed: () {
+                              controller.refuserExamen(examen.id);
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                Get.snackbar('Refuser Examen', "votre examen a été acceptée");
+                              });
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ],
+                  );
+                }
+              },
             ),
           ),
         ],

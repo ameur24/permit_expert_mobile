@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/profile/profilep1.dart';
 
 import '../../routes/routes_helper.dart';
 import '../../widgets/container/greencontainer.dart';
 import '../../widgets/container/learnContainer.dart';
 import '../../widgets/container/vidcontainer.dart';
-import '../Notification/list_notifications.dart';
+
 
 class MyScreen extends StatelessWidget {
   @override
@@ -19,14 +18,14 @@ class MyScreen extends StatelessWidget {
             onPressed: () {
               Get.toNamed(RouteHelper.notifications);
 
-             // Get.to(ListNotifications());
+
             },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
               Get.toNamed(RouteHelper.profile);
-            //  Get.to(ProfilePage());
+
             },
           ),
         ],
@@ -49,7 +48,7 @@ class MyScreen extends StatelessWidget {
             barWidth: 2,
             barHeight: 70,
             title: 'Voici_une_ressource_qui_peut_vous_aider:'.tr,
-            link: "https://www.ressource.com/", // Ajoutez le lien ici
+            link: "https://www.ressource.com/",
           ),
           SizedBox(height: 10),
           LearnContainer(
@@ -58,7 +57,7 @@ class MyScreen extends StatelessWidget {
             barWidth: 2,
             barHeight: 75,
             title: 'Voici_un_test_en_ligne_qui_peut_vous_aider:'.tr,
-            link: "https://www.permisecole.com/code/gratuit", // Ajoutez le lien ici
+            link: "https://www.permisecole.com/code/gratuit",
           ),
           SizedBox(height: 10),
           VContainer(

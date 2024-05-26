@@ -41,21 +41,14 @@ class NotificationContainer extends StatelessWidget {
                     fontFamily: 'Poppins',
                   ),
                 ),
-
-                  Center(
-                    child: Text(
-                      subtitle,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: 'poppins',
-                        color: Color(0xFF000000),
-                      ),
-                    ),
-
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'poppins',
+                    color: Color(0xFF000000),
                   ),
-
-
-
+                ),
               ],
             ),
           ),

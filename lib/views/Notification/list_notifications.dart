@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../routes/routes_helper.dart';
+import '../../data/controllers/notification_controller.dart';
 import '../../widgets/container/notificationContainer.dart';
+import '../../models/notification_model.dart';
+import '../../routes/routes_helper.dart';
 
-class ListNotifications extends StatelessWidget {
+class ListNotifications extends GetView<NotificationController> {
   @override
   Widget build(BuildContext context) {
-    return
-
-
-      Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text(
@@ -23,39 +21,59 @@ class ListNotifications extends StatelessWidget {
             icon: Icon(Icons.account_circle),
             onPressed: () {
               Get.toNamed(RouteHelper.profile);
-
-             // Get.to(ProfilePage());
             },
           ),
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.only(top: 35),
-        child: Column(
-          children: [
-            NotificationContainer(
-              title: 'Lundi 23 Février',
-              subtitle: '“Votre séance code est reporté au Mercredi”',
-              date: 'maintenant',
+      body: Obx(() {
+        if (controller.notifications.isEmpty) {
+          return _buildEmptyState();
+        } else {
+          return Container(
+            padding: EdgeInsets.only(top: 35),
+            child: ListView.separated(
+              itemCount: controller.notifications.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(height: 10);
+              },
+              itemBuilder: (context, index) {
+                NotificationModel notification = controller.notifications[index];
+                return NotificationContainer(
+                  title: notification.title,
+                  subtitle: notification.subtitle,
+                  date: notification.date,
+                );
+              },
             ),
-            SizedBox(height: 10),
-            NotificationContainer(
-              title: 'Lundi 10 Mars',
-              subtitle: '“Nous avons rappelons que votre examen de code est prévu pour Mardi 20 Mars à 9h”',
-              date: 'Il y’a 19 min',
+          );
+        }
+      }),
+    );
+  }
+
+  Widget _buildEmptyState() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Image.asset(
+              'assets/images/notif.png',
+              width: 347,
+              height: 502,
             ),
-            SizedBox(height: 10),
-            NotificationContainer(
-              title: 'Lundi 23 Février',
-              subtitle: '“Votre séance code est reporté au Mercredi”', date: 'Il y’a 58min',
+          ),
+          SizedBox(height: 20),
+          Text(
+            'Aucune notification',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.grey,
+              fontFamily: 'Poppins',
             ),
-            SizedBox(height: 10),
-            NotificationContainer(
-              title: 'Lundi 23 Février',
-              subtitle: '“Votre séance code est reporté au Mercredi”', date: 'Il y’a 6 heures',
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

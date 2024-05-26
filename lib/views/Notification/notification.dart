@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../routes/routes_helper.dart';
-import '../profile/profilep1.dart';
 
 class NotificationsScreen extends StatelessWidget {
   @override

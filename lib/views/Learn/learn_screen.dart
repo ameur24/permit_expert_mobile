@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Learn/learn2.dart';
-import 'package:test2/views/Learn/learn3.dart';
-import 'package:test2/views/Learn/learn4.dart';
-
 import '../../routes/routes_helper.dart';
 import '../../widgets/container/greycontainer.dart';
-import '../Notification/list_notifications.dart';
-import '../profile/profilep1.dart';
-import '../Notification/notification.dart';
-import 'learn1.dart';
+
 
 class LearnScreen extends StatelessWidget {
   @override
@@ -26,7 +19,6 @@ class LearnScreen extends StatelessWidget {
             onPressed: () {
               Get.toNamed(RouteHelper.notifications);
 
-             // Get.to(ListNotifications());
             },
           ),
           IconButton(
@@ -34,7 +26,6 @@ class LearnScreen extends StatelessWidget {
             onPressed: () {
               Get.toNamed(RouteHelper.profile);
 
-             // Get.to(ProfilePage());
             },
           ),
         ],
@@ -69,7 +60,6 @@ class LearnScreen extends StatelessWidget {
               onPressed: () {
                 Get.toNamed(RouteHelper.learn1);
 
-                //Get.to(MyScreen());
               },
             ),
             _buildCustomContainerWithProgress(
@@ -98,7 +88,6 @@ class LearnScreen extends StatelessWidget {
               onPressed: () {
                 Get.toNamed(RouteHelper.learn4);
 
-                // Get.to(MyScreen3());
               },
             ),
           ],

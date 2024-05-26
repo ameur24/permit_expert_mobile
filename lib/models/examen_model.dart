@@ -1,27 +1,30 @@
-class Seance {
+class Examen {
   final int id;
   final String type;
   final String heureD;
   final String heureF;
-  final String dateS;
+  final String dateE;
   final String status;
 
-  Seance({
+
+
+  Examen({
     required this.id,
     required this.type,
     required this.heureD,
     required this.heureF,
-    required this.dateS,
+    required this.dateE,
     required this.status,
+
   });
 
-  factory Seance.fromJson(Map<String, dynamic> json) {
-    return Seance(
+  factory Examen.fromJson(Map<String, dynamic> json) {
+    return Examen(
       id: json['id'],
       type: json['type'],
       heureD: json['heureD'],
       heureF: json['heureF'],
-      dateS: json['dateS'],
+      dateE: json['dateE'],
       status: json['status'],
     );
   }

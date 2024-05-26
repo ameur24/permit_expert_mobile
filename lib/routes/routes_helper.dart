@@ -22,7 +22,12 @@ import 'package:test2/views/sign_up/codeV%C3%A9rifMDP.dart';
 import 'package:test2/views/sign_up/inscription.dart';
 import 'package:test2/views/sign_up/mdpOublie.dart';
 import '../data/bindings/calendar_binding.dart';
+import '../data/bindings/change_pwd_binding.dart';
+import '../data/bindings/edit_profile_binding.dart';
+import '../data/bindings/message_binding.dart';
+import '../data/bindings/notification_binding.dart';
 import '../data/bindings/sign_up_binding.dart';
+import '../data/bindings/transaction_binding.dart';
 import '../views/sign_up/sign_up.dart';
 
 class RouteHelper {
@@ -130,81 +135,98 @@ class RouteHelper {
         name: checkCode,
         page: () => VerificationScreen(),//write email for verification
         binding: SignUPBinding(),
+      transition: Transition.cupertino,
     ),
     GetPage(
         name: signUp,
         page: () => Inscription(),//register
         binding: SignUPBinding(),
+      transition: Transition.cupertino,
     ),
     GetPage(
         name: home,
         page: () => HomeScreen(),
-        binding: LoginBinding()
+        binding: LoginBinding(),
+      transition: Transition.cupertino,
     ),
     GetPage(
         name: learnCode,
         page: () => LearnScreen(),
-        binding: LoginBinding()
+        binding: LoginBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: learn1,
         page: () => MyScreen(),
-        binding: LoginBinding()
+        binding: LoginBinding(),
+        transition: Transition.cupertino,
+
     ),
     GetPage(
         name: learn2,
         page: () => MyScreen1(),
-        binding: LoginBinding()
+        binding: LoginBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: learn3,
         page: () => MyScreen2(),
-        binding: LoginBinding()
+        binding: LoginBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: learn4,
         page: () => MyScreen3(),
-        binding: LoginBinding()
+        binding: LoginBinding(),
+        transition: Transition.cupertino,
     ),
 
     GetPage(
         name: contact,
         page: () => MessageScreen(),
-        binding: LoginBinding()
+        binding: MessageBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: notifications,
         page: () => ListNotifications(),
-        binding: LoginBinding()
+        binding: NotificationBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: payment,
         page: () => PaymentScreen(),
-        binding: LoginBinding()
+        binding: TransactionBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: calendarEvent,
         page: () => CalendarScreen2(),
-        binding: CalendarBinding()
+        binding: CalendarBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: changePassword,
         page: () => ChangePasswordScreen(),
-        binding: LoginBinding()
+        binding: ChangeBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: parameter,
         page: () => ParametresPage(),
-        binding: LoginBinding()
+        binding: ChangeBinding(),
+        transition: Transition.cupertino,
     ),
     GetPage(
         name: profile,
         page: () => ProfilePage(),
-        binding: LoginBinding()
+        binding: EditProfileBinding(),
+        transition: Transition.cupertino,
     ),  GetPage(
         name: editProfile,
         page: () => ProfilePage2(),
-        binding: LoginBinding()
+        binding: EditProfileBinding(),
+        transition: Transition.cupertino,
     ),
     //TODO : Add the rest of screens here , use bindings in all of them to call controllers/repos
   ];

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test2/routes/routes_helper.dart';
-import 'package:test2/views/Notification/notification.dart';
+import '../../data/controllers/app_controller.dart';
 import '../../widgets/container/CustomContainer.dart';
-import '../Learn/learn_screen.dart';
-import '../MessageScreen.dart';
-import '../Paiement/paiement_screen.dart';
-import '../calendar/calendar_event.dart';
-import '../profile/profilep1.dart';
+
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -19,7 +15,6 @@ class HomeScreen extends StatelessWidget {
             icon: Icon(Icons.notifications),
             onPressed: () {
               Get.toNamed(RouteHelper.notifications);
-            // Get.to( NotificationsScreen());
              },
           ),
           IconButton(
@@ -28,7 +23,6 @@ class HomeScreen extends StatelessWidget {
               Get.toNamed(RouteHelper.profile);
 
             }
-              //Get.to( ProfilePage());            },
           ),
         ],
 
@@ -63,11 +57,10 @@ class HomeScreen extends StatelessWidget {
               Center(
                 child: CustomContainer(
                   color: Color(0xFFDF7588),
-                  imagePath: 'assets/images/capture_d___cran_2024-04-14_233651-removebg-preview_480 1.png', // Chemin de l'image du premier conteneur
+                  imagePath: 'assets/images/capture_d___cran_2024-04-14_233651-removebg-preview_480 1.png',
                   text: 'Consulter_le_calendrier'.tr,
                   onPressed: (){
                     Get.toNamed(RouteHelper.calendarEvent);
-                    //Get.to(CalendarScreen2());
                   }, imageWidth: 53,
                   imageHeight: 72,
 
@@ -76,14 +69,14 @@ class HomeScreen extends StatelessWidget {
               Center(
                 child: CustomContainer(
                   color: Color(0xFFFA9135),
-                  imagePath: 'assets/images/capture_d___cran_2024-04-15_001601-removebg-preview_480 1.png', // Chemin de l'image du deuxième conteneur
-                  text: 'Apprendre_le_code'.tr,
+                  imagePath: 'assets/images/capture_d___cran_2024-04-15_001139-removebg-preview_480 1.png',
+                  text: "Consulter_l'historique_de_paiement".tr,
                   onPressed: (){
-                    Get.toNamed(RouteHelper.learnCode);
+                    Get.toNamed(RouteHelper.payment);   }, imageWidth: 125,
 
-                    //Get.to(LearnScreen());
-                  }, imageWidth: 123,
-                  imageHeight: 69,
+
+
+                  imageHeight: 99,
                 ),
               ),
             ],
@@ -94,29 +87,31 @@ class HomeScreen extends StatelessWidget {
             children: [
               Center(
                 child: CustomContainer(
-                  color: Color(0xFF60C1DC),
-                  imagePath: 'assets/images/capture_d___cran_2024-04-15_001139-removebg-preview_480 1.png', // Chemin de l'image du troisième conteneur
-                  text: "Consulter_l'historique_de_paiement".tr,
-                  onPressed: (){
-                    Get.toNamed(RouteHelper.payment);
-                   // Get.to(PaymentScreen());
-
-                  }, imageWidth: 125,
-                  imageHeight: 99,
-
-                ),
-              ),
-              Center(
-                child: CustomContainer(
                   color: Colors.lightGreen,
-                  imagePath: 'assets/images/Capture_d_écran_2024-04-14_233103-removebg-preview 1.png', // Chemin de l'image du quatrième conteneur
+                  imagePath: 'assets/images/Capture_d_écran_2024-04-14_233103-removebg-preview 1.png',
                   text: 'Laisser_un_message'.tr,
                   onPressed: (){
                     Get.toNamed(RouteHelper.contact);
 
-                   // Get.to(MessageScreen());
-                  },
-                  imageWidth: 92,
+                  },  imageWidth: 92,
+                  imageHeight: 69,
+
+                ),
+              ),
+              if( Get
+                  .find<AppController>()
+                  .userRole == Roles.candidat)
+              Center(
+
+                child: CustomContainer(
+                  color: Color(0xFF60C1DC),
+
+                  imagePath: 'assets/images/capture_d___cran_2024-04-15_001601-removebg-preview_480 1.png',
+                  text: 'Apprendre_le_code'.tr,
+                  onPressed: (){
+                    Get.toNamed(RouteHelper.learnCode);
+                    },
+                  imageWidth: 123,
                   imageHeight: 69,
                 ),
               ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/parametre.dart';
-import 'package:test2/widgets/my_botton/my_button.dart';
+import '../widgets/my_botton/my_button.dart';
+import 'data/controllers/change_pwd_controller.dart';
 
-class ChangePasswordScreen extends StatelessWidget {
+class ChangePasswordScreen extends GetView<ChangePwdController> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,110 +16,106 @@ class ChangePasswordScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 115, left: 15),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 19),
-                child: Text(
-                  'Mot de passe actuelle  :',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFF707070),
-                    fontFamily: 'poppins',
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 115, left: 15),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 19),
+                  child: Text(
+                    'Mot de passe actuel:',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF707070),
+                      fontFamily: 'Poppins',
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: InputBoxContainer(
-                  hintText: 'Mot de passe actuelle',
-                  iconColor: Color(0xFFA8AFB9),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 32),
-              child: Text(
-                'Nouveau mot de passe:',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF707070),
-                  fontFamily: 'poppins',
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: InputBoxContainer(
-                  hintText: 'Nouveau mot de passe',
-                  iconColor: Color(0xFFA8AFB9),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Text(
-                  'Confirmer mot de passe:',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFF707070),
-                    fontFamily: 'poppins',
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: InputBoxContainer(
+                    hintText: 'Mot de passe actuel',
+                    iconColor: Color(0xFFA8AFB9),
+                    controller: controller.oldPasswordController,
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Padding(
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 32),
+                child: Text(
+                  'Nouveau mot de passe:',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF707070),
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: InputBoxContainer(
+                    hintText: 'Nouveau mot de passe',
+                    iconColor: Color(0xFFA8AFB9),
+                    controller: controller.newPasswordController,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Padding(
                 padding: const EdgeInsets.only(left: 15),
-                child: InputBoxContainer(
-                  hintText: 'Confirmer mot de passe',
-                  iconColor: Color(0xFFA8AFB9),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    'Confirmer mot de passe:',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF707070),
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 70),
-
-            // Bouton "Modifier"
-            Container(
-              width: 329,
-              height: 50,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 50),
-                child: MyButton(
-                  txt: 'Enregistrer',
-                  onPressed: () {
-                    Get.to(ParametresPage());
-                  },
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: InputBoxContainer(
+                    hintText: 'Confirmer mot de passe',
+                    iconColor: Color(0xFFA8AFB9),
+                    controller: controller.confirmPasswordController,
+                  ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 70),
+              Container(
+                width: 329,
+                height: 50,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 50),
+                  child: MyButton(
+                    txt: 'Enregistrer',
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        controller.changePassword();
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -127,8 +125,13 @@ class ChangePasswordScreen extends StatelessWidget {
 class InputBoxContainer extends StatelessWidget {
   final String hintText;
   final Color iconColor;
+  final TextEditingController controller;
 
-  const InputBoxContainer({required this.hintText, required this.iconColor});
+  const InputBoxContainer({
+    required this.hintText,
+    required this.iconColor,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +146,7 @@ class InputBoxContainer extends StatelessWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 1,
             blurRadius: 2,
-            offset: Offset(0, 1), // changes position of shadow
+            offset: Offset(0, 1),
           ),
         ],
       ),
@@ -155,7 +158,8 @@ class InputBoxContainer extends StatelessWidget {
           ),
           Expanded(
             child: TextFormField(
-              obscureText: true, // hide input text
+              controller: controller,
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: TextStyle(
@@ -164,6 +168,12 @@ class InputBoxContainer extends StatelessWidget {
                 ),
                 border: InputBorder.none,
               ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ce champ est obligatoire';
+                }
+                return null;
+              },
             ),
           ),
         ],
