@@ -19,4 +19,24 @@ class TransactionController extends GetxController {
     var fetchedTransactions = await transactionRepo.getTransactions();
     transactions.value = fetchedTransactions;
   }
+  double calculateTotalDebits() {
+    return transactions
+        .where((transaction) => transaction.typeTransaction == 'flux sortant')
+        .fold(0, (sum, transaction) => sum + transaction.montantT);
+  }
+  double calculateTotalCredits() {
+    return transactions
+        .where((transaction) => transaction.typeTransaction == 'flux entrant')
+        .fold(0, (sum, transaction) => sum + transaction.montantT);
+  }
+  double calculateTotalBalanceMoniteur() {
+    double totalDebits = calculateTotalDebits();
+    double totalCredits = calculateTotalCredits();
+    return totalDebits-totalCredits ;
+  }
+  double calculateTotalBalanceCandidat() {
+    double totalDebits = calculateTotalDebits();
+    double totalCredits = calculateTotalCredits();
+    return totalCredits-totalDebits ;
+  }
 }

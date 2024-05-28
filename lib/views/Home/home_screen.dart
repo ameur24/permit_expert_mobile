@@ -83,21 +83,21 @@ class HomeScreen extends StatelessWidget {
           ),
           SizedBox(height: 5),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment:Get
+                .find<AppController>()
+                .userRole == Roles.moniteur ? MainAxisAlignment.start : MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                child: CustomContainer(
-                  color: Colors.lightGreen,
-                  imagePath: 'assets/images/Capture_d_écran_2024-04-14_233103-removebg-preview 1.png',
-                  text: 'Laisser_un_message'.tr,
-                  onPressed: (){
-                    Get.toNamed(RouteHelper.contact);
+              CustomContainer(
+                color: Colors.lightGreen,
+                imagePath: 'assets/images/Capture_d_écran_2024-04-14_233103-removebg-preview 1.png',
+                text: 'Laisser_un_message'.tr,
+                onPressed: (){
+                  Get.toNamed(RouteHelper.contact);
 
-                  },  imageWidth: 92,
-                  imageHeight: 69,
+                },  imageWidth: 92,
+                imageHeight: 69,
 
-                ),
-              ),
+              ).paddingOnly(left: 8),
               if( Get
                   .find<AppController>()
                   .userRole == Roles.candidat)

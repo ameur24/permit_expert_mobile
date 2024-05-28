@@ -4,8 +4,10 @@ class EventContainer extends StatelessWidget {
   final String date;
   final String title;
   final String subtitle;
+  final String status; // Add this line
   final String acceptButtonText;
   final String rejectButtonText;
+
   final VoidCallback onAcceptPressed;
   final VoidCallback onRejectPressed;
   final bool showButtons;
@@ -14,6 +16,7 @@ class EventContainer extends StatelessWidget {
     required this.date,
     required this.title,
     required this.subtitle,
+    required this.status, // Add this line
     required this.acceptButtonText,
     required this.rejectButtonText,
     required this.onAcceptPressed,
@@ -27,7 +30,7 @@ class EventContainer extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: Container(
         width: 360,
-        height: 105,
+        height: 130, // Increase height to accommodate status
         decoration: BoxDecoration(
           border: Border.all(color: Color(0xFF8F9BB3)),
           borderRadius: BorderRadius.circular(10),
@@ -74,51 +77,74 @@ class EventContainer extends StatelessWidget {
                       fontSize: 11,
                     ),
                   ),
+                  Row(
+                    children: [
+                      Text(
+                        status,
+                        style: TextStyle(
+                          color: status == 'confirmee'
+                              ? Colors.lightGreen
+                              : status == 'en attente'
+                              ? Colors.orange
+                              : Colors.red,                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      if (status == 'confirmee')
+                        Icon(Icons.check, color: Colors.lightGreen),
+                      if (status == 'refusee')
+                        Icon(Icons.cancel, color: Colors.red),
+                      if (status == 'en attente')
+                        Icon(Icons.hourglass_top, color: Colors.orange),
+                    ],
+                  ),
                 ],
               ),
             ),
-            if (showButtons) Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10, top: 5),
-                  child: ElevatedButton(
-                    onPressed: onAcceptPressed,
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF9DCD5A),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+            if (showButtons)
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10, top: 5),
+                    child: ElevatedButton(
+                      onPressed: onAcceptPressed,
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xFF9DCD5A),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      acceptButtonText,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: ElevatedButton(
-                    onPressed: onRejectPressed,
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFFFA7F35),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text(
-                      rejectButtonText,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
+                      child: Text(
+                        acceptButtonText,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: ElevatedButton(
+                      onPressed: onRejectPressed,
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xFFFA7F35),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text(
+                        rejectButtonText,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       ),

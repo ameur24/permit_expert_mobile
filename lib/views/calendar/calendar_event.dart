@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:test2/models/examen_model.dart';
+import '../../data/controllers/app_controller.dart';
 import '../../data/controllers/calendar_controller.dart';
+import '../../models/seance_model.dart';
 import '../../routes/routes_helper.dart';
 import '../../widgets/container/Eventcontainer.dart';
 import 'package:intl/intl.dart';
@@ -9,6 +12,8 @@ import 'package:intl/intl.dart';
 class CalendarScreen2 extends GetView<CalendarController> {
   @override
   Widget build(BuildContext context) {
+    final appController = Get.find<AppController>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -125,8 +130,12 @@ class CalendarScreen2 extends GetView<CalendarController> {
                             date: '${seance.heureD}-${seance.heureF}',
                             title: "Séance " + seance.type,
                             subtitle: 'Vous pouvez choisir entre accepter et refuser.',
-                          acceptButtonText: 'AccepterS',
-                            rejectButtonText: 'RefuserS',
+                            acceptButtonText: 'Accepter',
+                            rejectButtonText: 'Refuser',
+                            showButtons: appController.userRole == Roles.moniteur
+                             ? seance.moniteur_status == StatusCandidat.awaiting
+                                : seance.candidat_status == StatusMoniteur.awaiting,
+
                             onAcceptPressed: () {
                               controller.acceptSeance(seance.id);
                               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -134,11 +143,11 @@ class CalendarScreen2 extends GetView<CalendarController> {
                               });
                             },
                             onRejectPressed: () {
-                              controller.RefuserSeance(seance.id);
+                              controller.refuserSeance(seance.id);
                               WidgetsBinding.instance.addPostFrameCallback((_) {
-                                Get.snackbar('Refuser Séance', "votre séance a été refuséé");
+                                Get.snackbar('Refuser Séance', "votre séance a été refusée");
                               });
-                            },
+                            }, status: seance.status,
                           ),
                         );
                       }).toList(),
@@ -149,22 +158,21 @@ class CalendarScreen2 extends GetView<CalendarController> {
                             date: '${examen.heureD}-${examen.heureF}',
                             title: "Examen " + examen.type,
                             subtitle: 'Vous pouvez choisir entre accepter et refuser.',
-                            acceptButtonText: 'AccepterE',
-                            rejectButtonText: 'RefuserE',
-
+                            acceptButtonText: 'Accepter',
+                            rejectButtonText: 'Refuser',
+                            showButtons: examen.status == Status.awaiting,
                             onAcceptPressed: () {
                               controller.acceptExamen(examen.id);
                               WidgetsBinding.instance.addPostFrameCallback((_) {
-                                Get.snackbar('Accepter Examen', "votre examen a été acceptée");
+                                Get.snackbar('Accepter Examen', "votre examen a été accepté");
                               });
-                             bool value=true;
                             },
                             onRejectPressed: () {
                               controller.refuserExamen(examen.id);
                               WidgetsBinding.instance.addPostFrameCallback((_) {
-                                Get.snackbar('Refuser Examen', "votre examen a été acceptée");
+                                Get.snackbar('Refuser Examen', "votre examen a été refusé");
                               });
-                            },
+                            }, status: examen.type,
                           ),
                         );
                       }).toList(),

@@ -2,9 +2,11 @@ import 'package:get/get.dart';
 import '../repository/calendar_repo.dart';
 import '../../models/seance_model.dart';
 import '../../models/examen_model.dart';
+import 'app_controller.dart';
 
 class CalendarController extends GetxController {
   final CalendarRepo calendarRepo;
+  final appController = Get.find<AppController>();
 
   var selectedDay = Rx<DateTime>(DateTime.now());
   var focusedDay = Rx<DateTime>(DateTime.now());
@@ -28,6 +30,8 @@ class CalendarController extends GetxController {
   }
 
   void fetchSeancesForSelectedDay() async {
+    seances.clear();
+    examens.clear();
     final formattedDate = "${selectedDay.value.year}-${selectedDay.value.month}-${selectedDay.value.day}";
     final response = await calendarRepo.fetchSeancesForDate(formattedDate);
     final data = response.body;
@@ -39,46 +43,61 @@ class CalendarController extends GetxController {
     final response = await calendarRepo.fetchEvents();
     final data = response.body;
 
-    List<DateTime> seanceDates = (data['seances'] as List).map((date) => DateTime.parse(date as String)).toList();
-    List<DateTime> examenDates = (data['examens'] as List).map((date) => DateTime.parse(date as String)).toList();
+    List<DateTime> seanceDates = (data['seances'] as List).map((date) => DateTime.parse(date.toString())).toList();
+    List<DateTime> examenDates = (data['examens'] as List).map((date) => DateTime.parse(date.toString())).toList();
 
     eventDays.value = [
       ...seanceDates,
       ...examenDates,
     ].toSet().toList();
   }
-  Future<String> acceptExamen(int examenId) async {
-    try {
-      final message = await calendarRepo.acceptExamen(examenId);
-      return message;
-    } catch (e) {
-      throw Exception('Failed to accept examen: $e');
+
+  Future acceptExamen(int examenId) async {
+    final response = await calendarRepo.acceptExamen(examenId);
+    if (response.statusCode == 200) {
+      examens.firstWhere((element) => element.id == examenId).status = Status.accepted;
+    } else {
+      Get.snackbar('Erreur', 'Une erreur est survenue');
     }
+    update();
   }
-  void refuserExamen(int examenId) async {
-    try {
-      final message = await calendarRepo.refuserExamen(examenId);
-      print(message);
-    } catch (e) {
-      print('Failed to refuse examen: $e');
+
+  Future refuserExamen(int examenId) async {
+    final response = await calendarRepo.refuserExamen(examenId);
+    if (response.statusCode == 200) {
+      examens.firstWhere((element) => element.id == examenId).status = Status.refused;
+    } else {
+      Get.snackbar('Erreur', 'Une erreur est survenue');
     }
+    update();
   }
-  Future<String> acceptSeance(int seanceId) async {
-    try {
-      final message = await calendarRepo.acceptSeance(seanceId);
-      return message;
-    } catch (e) {
-      throw Exception('Failed to accept seance: $e');
+
+  Future acceptSeance(int seanceId) async {
+    final response = await calendarRepo.acceptSeance(seanceId);
+    if (response.statusCode == 200) {
+      if (appController.userRole == Roles.moniteur) {
+        seances.firstWhere((element) => element.id == seanceId).moniteur_status = StatusMoniteur.accepted;
+      } else {
+        seances.firstWhere((element) => element.id == seanceId).candidat_status = StatusCandidat.accepted;
+      }    } else {
+      Get.snackbar('Erreur', 'Une erreur est survenue');
     }
+    update();
   }
-  Future<String> RefuserSeance(int seanceId) async {
-    try {
-      final message = await calendarRepo.acceptSeance(seanceId);
-      return message;
-    } catch (e) {
-      throw Exception('Failed to refuse seance: $e');
+
+  Future refuserSeance(int seanceId) async {
+    final response = await calendarRepo.RefuserSeance(seanceId);
+    if (response.statusCode == 200) {
+      if (appController.userRole == Roles.moniteur) {
+        seances.firstWhere((element) => element.id == seanceId).moniteur_status = StatusMoniteur.accepted;
+      } else {
+        seances.firstWhere((element) => element.id == seanceId).candidat_status = StatusCandidat.accepted;
+      }    } else {
+      Get.snackbar('Erreur', 'Une erreur est survenue');
     }
+    update();
   }
+
   Map<DateTime, List<dynamic> Function(DateTime)> buildEventMap() {
     Map<DateTime, List<dynamic> Function(DateTime)> eventMap = {};
 

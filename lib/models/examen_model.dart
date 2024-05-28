@@ -4,7 +4,7 @@ class Examen {
   final String heureD;
   final String heureF;
   final String dateE;
-  final String status;
+   Status status;
 
 
 
@@ -25,7 +25,20 @@ class Examen {
       heureD: json['heureD'],
       heureF: json['heureF'],
       dateE: json['dateE'],
-      status: json['status'],
-    );
+      status: stringToStatus(json['status']),    );
   }
 }
+enum Status {accepted,refused,awaiting}
+Status stringToStatus(String statusString) {
+  switch (statusString) {
+    case 'confirmee':
+      return Status.accepted;
+    case 'refusee':
+      return Status.refused;
+    case 'en attente':
+      return Status.awaiting;
+    default:
+      throw ArgumentError('Unknown status string: $statusString');
+  }
+}
+

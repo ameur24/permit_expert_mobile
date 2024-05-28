@@ -21,7 +21,6 @@ class CustomContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-      child: Container(
         width: 183,
         height: 261,
         decoration: BoxDecoration(
@@ -51,7 +50,6 @@ class CustomContainer extends StatelessWidget {
             ),
           ],
         ),
-      ),
       ),
     );
   }
