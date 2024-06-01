@@ -31,6 +31,6 @@ class CalendarRepo extends GetxService {
   }
 
   Future<Response> RefuserSeance(int seanceId) async {
-    return await apiClient.putData('/api/seance/AccepterSeance/$seanceId', {});
+    return await apiClient.putData('/api/seance/RefuserSeance/$seanceId', {});
   }
 }

@@ -1,18 +1,18 @@
 import 'package:get/get.dart';
+import 'package:test2/utils/utils.dart';
 import '../repository/calendar_repo.dart';
 import '../../models/seance_model.dart';
 import '../../models/examen_model.dart';
-import 'app_controller.dart';
 
 class CalendarController extends GetxController {
   final CalendarRepo calendarRepo;
-  final appController = Get.find<AppController>();
 
   var selectedDay = Rx<DateTime>(DateTime.now());
   var focusedDay = Rx<DateTime>(DateTime.now());
   var seances = <Seance>[].obs;
   var examens = <Examen>[].obs;
   var eventDays = <DateTime>[].obs;
+  var isLoading = false.obs; // Add loading state
 
   CalendarController({required this.calendarRepo});
 
@@ -30,72 +30,127 @@ class CalendarController extends GetxController {
   }
 
   void fetchSeancesForSelectedDay() async {
-    seances.clear();
-    examens.clear();
-    final formattedDate = "${selectedDay.value.year}-${selectedDay.value.month}-${selectedDay.value.day}";
-    final response = await calendarRepo.fetchSeancesForDate(formattedDate);
-    final data = response.body;
-    seances.value = (data['seances'] as List).map((e) => Seance.fromJson(e)).toList();
-    examens.value = (data['examens'] as List).map((e) => Examen.fromJson(e)).toList();
+    isLoading.value = true; // Start loading
+    try {
+      seances.clear();
+      examens.clear();
+
+      final formattedDate = "${selectedDay.value.year}-${selectedDay.value.month}-${selectedDay.value.day}";
+      final response = await calendarRepo.fetchSeancesForDate(formattedDate);
+      if (response.statusCode == 404) {
+        print("une erreur est survenue");
+        isLoading.value = false; // End loading
+        return;
+      }
+      final data = response.body;
+      seances.value = (data['seances'] as List?)?.map((e) => Seance.fromJson(e)).toList() ?? [];
+      examens.value = (data['examens'] as List?)?.map((e) => Examen.fromJson(e)).toList() ?? [];
+    } catch (e) {
+      print('Error fetching seances and exams for selected day: $e');
+      Get.snackbar('Error', 'An error occurred while fetching events for the selected date');
+    } finally {
+      isLoading.value = false; // End loading
+    }
   }
 
   void fetchEventDays() async {
-    final response = await calendarRepo.fetchEvents();
-    final data = response.body;
+    isLoading.value = true; // Start loading
+    try {
+      final response = await calendarRepo.fetchEvents();
+      final data = response.body;
 
-    List<DateTime> seanceDates = (data['seances'] as List).map((date) => DateTime.parse(date.toString())).toList();
-    List<DateTime> examenDates = (data['examens'] as List).map((date) => DateTime.parse(date.toString())).toList();
+      List<DateTime> seanceDates = (data['seances'] as List).map((date) => DateTime.parse(date.toString())).toList();
+      List<DateTime> examenDates = (data['examens'] as List).map((date) => DateTime.parse(date.toString())).toList();
 
-    eventDays.value = [
-      ...seanceDates,
-      ...examenDates,
-    ].toSet().toList();
+      eventDays.value = [
+        ...seanceDates,
+        ...examenDates,
+      ].toSet().toList();
+    } catch (e) {
+      print('Error fetching event days: $e');
+    } finally {
+      isLoading.value = false; // End loading
+    }
   }
 
   Future acceptExamen(int examenId) async {
-    final response = await calendarRepo.acceptExamen(examenId);
-    if (response.statusCode == 200) {
-      examens.firstWhere((element) => element.id == examenId).status = Status.accepted;
-    } else {
-      Get.snackbar('Erreur', 'Une erreur est survenue');
+    isLoading.value = true; // Start loading
+    try {
+      final response = await calendarRepo.acceptExamen(examenId);
+      if (response.statusCode == 200) {
+        final examen = examens.firstWhere((element) => element.id == examenId);
+        examen.status = Status.accepted;
+        update();
+      } else {
+        print("une erreur est survenue");
+      }
+    } catch (e) {
+      print('Error accepting examen: $e');
+    } finally {
+      isLoading.value = false; // End loading
     }
-    update();
   }
 
   Future refuserExamen(int examenId) async {
-    final response = await calendarRepo.refuserExamen(examenId);
-    if (response.statusCode == 200) {
-      examens.firstWhere((element) => element.id == examenId).status = Status.refused;
-    } else {
-      Get.snackbar('Erreur', 'Une erreur est survenue');
+    isLoading.value = true; // Start loading
+    try {
+      final response = await calendarRepo.refuserExamen(examenId);
+      if (response.statusCode == 200) {
+        final examen = examens.firstWhere((element) => element.id == examenId);
+        examen.status = Status.refused;
+        update();
+      } else {
+        print("une erreur est survenue");
+      }
+    } catch (e) {
+      print('Error refusing examen: $e');
+    } finally {
+      isLoading.value = false; // End loading
     }
-    update();
   }
 
   Future acceptSeance(int seanceId) async {
-    final response = await calendarRepo.acceptSeance(seanceId);
-    if (response.statusCode == 200) {
-      if (appController.userRole == Roles.moniteur) {
-        seances.firstWhere((element) => element.id == seanceId).moniteur_status = StatusMoniteur.accepted;
+    isLoading.value = true; // Start loading
+    try {
+      final response = await calendarRepo.acceptSeance(seanceId);
+      if (response.statusCode == 200) {
+        final seance = seances.firstWhere((element) => element.id == seanceId);
+        if (userRole == Roles.moniteur) {
+          seance.moniteur_status = Status.accepted;
+        } else {
+          seance.candidat_status = Status.accepted;
+        }
+        update();
       } else {
-        seances.firstWhere((element) => element.id == seanceId).candidat_status = StatusCandidat.accepted;
-      }    } else {
-      Get.snackbar('Erreur', 'Une erreur est survenue');
+        print("une erreur est survenue");
+      }
+    } catch (e) {
+      print('Error accepting seance: $e');
+    } finally {
+      isLoading.value = false; // End loading
     }
-    update();
   }
 
   Future refuserSeance(int seanceId) async {
-    final response = await calendarRepo.RefuserSeance(seanceId);
-    if (response.statusCode == 200) {
-      if (appController.userRole == Roles.moniteur) {
-        seances.firstWhere((element) => element.id == seanceId).moniteur_status = StatusMoniteur.accepted;
+    isLoading.value = true; // Start loading
+    try {
+      final response = await calendarRepo.RefuserSeance(seanceId);
+      if (response.statusCode == 200) {
+        final seance = seances.firstWhere((element) => element.id == seanceId);
+        if (userRole == Roles.moniteur) {
+          seance.moniteur_status = Status.refused;
+        } else {
+          seance.candidat_status = Status.refused;
+        }
+        update();
       } else {
-        seances.firstWhere((element) => element.id == seanceId).candidat_status = StatusCandidat.accepted;
-      }    } else {
-      Get.snackbar('Erreur', 'Une erreur est survenue');
+        print("une erreur est survenue");
+      }
+    } catch (e) {
+      print('Error refusing seance: $e');
+    } finally {
+      isLoading.value = false; // End loading
     }
-    update();
   }
 
   Map<DateTime, List<dynamic> Function(DateTime)> buildEventMap() {

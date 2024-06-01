@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:test2/data/controllers/app_controller.dart';
 import 'package:test2/routes/routes_helper.dart';
 
 import '../../models/login_model.dart';
+import '../../utils/utils.dart';
 import '../api/api_client.dart'as a;
 import '../repository/auth_repo.dart';
 
@@ -39,9 +39,8 @@ class AuthController extends GetxController {
           print("200");
           final token = response.body['access_token'];
           print('token : $token');
-          Get
-              .find<AppController>()
-              .userRole =
+
+            userRole =
           response.body['role'] == 'moniteur' ? Roles.moniteur : Roles.candidat;
 
           box.write('TOKEN', token);

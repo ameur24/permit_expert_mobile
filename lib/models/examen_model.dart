@@ -4,7 +4,7 @@ class Examen {
   final String heureD;
   final String heureF;
   final String dateE;
-   Status status;
+ Status status;
 
 
 
@@ -41,4 +41,5 @@ Status stringToStatus(String statusString) {
       throw ArgumentError('Unknown status string: $statusString');
   }
 }
+
 

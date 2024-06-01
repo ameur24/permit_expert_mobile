@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test2/routes/routes_helper.dart';
-import '../../data/controllers/app_controller.dart';
+import 'package:test2/utils/utils.dart';
 import '../../widgets/container/CustomContainer.dart';
 
 
@@ -83,9 +83,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SizedBox(height: 5),
           Row(
-            mainAxisAlignment:Get
-                .find<AppController>()
-                .userRole == Roles.moniteur ? MainAxisAlignment.start : MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment:userRole == Roles.moniteur ? MainAxisAlignment.start : MainAxisAlignment.spaceEvenly,
             children: [
               CustomContainer(
                 color: Colors.lightGreen,
@@ -98,9 +96,8 @@ class HomeScreen extends StatelessWidget {
                 imageHeight: 69,
 
               ).paddingOnly(left: 8),
-              if( Get
-                  .find<AppController>()
-                  .userRole == Roles.candidat)
+              if(
+                  userRole == Roles.candidat)
               Center(
 
                 child: CustomContainer(

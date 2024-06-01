@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/data/controllers/app_controller.dart';
+import 'package:test2/utils/utils.dart';
 import '../../data/controllers/transaction_controller.dart';
 import '../../routes/routes_helper.dart';
 import '../../widgets/container/PaiementContainer.dart';
@@ -8,7 +8,6 @@ import '../../widgets/container/PaiementContainer.dart';
 class PaymentScreen extends GetView<TransactionController> {
   @override
   Widget build(BuildContext context) {
-    final appController = Get.find<AppController>();
 
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +43,7 @@ class PaymentScreen extends GetView<TransactionController> {
         } else {
           double totalDebits = controller.calculateTotalDebits();
           double totalCredits = controller.calculateTotalCredits();
-          double totalBalance = appController.userRole == Roles.moniteur
+          double totalBalance = userRole == Roles.moniteur
               ? controller.calculateTotalBalanceMoniteur()
               : controller.calculateTotalBalanceCandidat();
 
@@ -90,7 +89,7 @@ class PaymentScreen extends GetView<TransactionController> {
                   ),
                 ),
                 SizedBox(height: 8),
-                if (appController.userRole == Roles.moniteur)
+                if (userRole == Roles.moniteur)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -1,12 +1,14 @@
+import 'examen_model.dart';
+
 class Seance {
   final int id;
   final String type;
   final String heureD;
   final String heureF;
   final String dateS;
-  final String status;
-   StatusCandidat candidat_status;
- StatusMoniteur moniteur_status;
+   Status status;
+  Status candidat_status;
+  Status moniteur_status;
 
   Seance({
     required this.id,
@@ -26,37 +28,35 @@ class Seance {
       heureD: json['heureD'] ?? '',
       heureF: json['heureF'] ?? '',
       dateS: json['dateS'] ?? '',
-      status: json['status'] ?? '',
-      candidat_status: stringToStatusCandidat(json['statusCandidat'] ?? ''),
-      moniteur_status: stringToStatusMoniteur(json['statusMoniteur'] ?? ''),
+      status: stringToStatus(json['status']),
+      candidat_status: stringToStatus(json['candidat_status'] ),
+      moniteur_status: stringToStatus(json['moniteur_status']),
     );
   }
 }
 
-enum StatusCandidat { accepted, refused, awaiting, unknown }
-StatusCandidat stringToStatusCandidat(String statusString) {
+Status stringToStatus(String statusString) {
   switch (statusString) {
     case 'confirmee':
-      return StatusCandidat.accepted;
+      return Status.accepted;
     case 'refusee':
-      return StatusCandidat.refused;
+      return Status.refused;
     case 'en attente':
-      return StatusCandidat.awaiting;
-    default:
-      return StatusCandidat.unknown;
+      return Status.awaiting;
+
   }
+  return Status.accepted;
 }
 
-enum StatusMoniteur { accepted, refused, awaiting, unknown }
-StatusMoniteur stringToStatusMoniteur(String statusString) {
+
+String statusToString(Status statusString) {
   switch (statusString) {
-    case 'confirmee':
-      return StatusMoniteur.accepted;
-    case 'refusee':
-      return StatusMoniteur.refused;
-    case 'en attente':
-      return StatusMoniteur.awaiting;
-    default:
-      return StatusMoniteur.unknown;
+    case Status.accepted:
+      return 'confirmee';
+    case Status.refused:
+      return 'refusee';
+    case Status.awaiting:
+      return  'en attente';
+
   }
 }
