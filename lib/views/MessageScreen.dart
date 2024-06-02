@@ -13,7 +13,7 @@ class MessageScreen extends GetView<MessageController> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'Laisser votre message',
+            'Laisser_votre_message'.tr,
             style: TextStyle(fontSize: 17),
           ),
         ),
@@ -62,12 +62,12 @@ class MessageScreen extends GetView<MessageController> {
                       controller: controller.messageController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Veuillez saisir votre message';
+                          return 'Veuillez_saisir_votre_message';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: 'Laissez votre message...',
+                        hintText: 'Laisser_votre_message'.tr,
                         border: InputBorder.none,
                       ),
                     ),
@@ -76,14 +76,14 @@ class MessageScreen extends GetView<MessageController> {
               ),
               SizedBox(height: 60),
               MyButton(
-                txt: 'Envoyer',
+                txt: 'Envoyer'.tr,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     controller.postMessage(controller.messageController.text);
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Votre message a été envoyé avec succès'),
+                        content: Text('Votre_message_a_été_envoyé_avec_succès'.tr),
                         backgroundColor: Colors.lightGreen,
                       ),
                     );

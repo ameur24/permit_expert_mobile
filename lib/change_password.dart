@@ -12,7 +12,7 @@ class ChangePasswordScreen extends GetView<ChangePwdController> {
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.only(left: 70),
-          child: Text('Profil'),
+          child: Text('Profil'.tr),
         ),
       ),
       body: SingleChildScrollView(
@@ -26,7 +26,7 @@ class ChangePasswordScreen extends GetView<ChangePwdController> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 19),
                   child: Text(
-                    'Mot de passe actuel:',
+                    'Mot_de_passe_actuel:'.tr,
                     style: TextStyle(
                       fontSize: 14,
                       color: Color(0xFF707070),
@@ -41,7 +41,7 @@ class ChangePasswordScreen extends GetView<ChangePwdController> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: InputBoxContainer(
-                    hintText: 'Mot de passe actuel',
+                    hintText: 'Mot_de_passe_actuel'.tr,
                     iconColor: Color(0xFFA8AFB9),
                     controller: controller.oldPasswordController,
                   ),
@@ -51,7 +51,7 @@ class ChangePasswordScreen extends GetView<ChangePwdController> {
               Padding(
                 padding: const EdgeInsets.only(left: 32),
                 child: Text(
-                  'Nouveau mot de passe:',
+                  'Nouveau_mot_de_passe:'.tr,
                   style: TextStyle(
                     fontSize: 14,
                     color: Color(0xFF707070),
@@ -65,7 +65,7 @@ class ChangePasswordScreen extends GetView<ChangePwdController> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: InputBoxContainer(
-                    hintText: 'Nouveau mot de passe',
+                    hintText: 'Nouveau_mot_de_passe'.tr,
                     iconColor: Color(0xFFA8AFB9),
                     controller: controller.newPasswordController,
                   ),
@@ -77,7 +77,7 @@ class ChangePasswordScreen extends GetView<ChangePwdController> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: Text(
-                    'Confirmer mot de passe:',
+                    'Confirmer_mot_de_passe:'.tr,
                     style: TextStyle(
                       fontSize: 14,
                       color: Color(0xFF707070),
@@ -92,7 +92,7 @@ class ChangePasswordScreen extends GetView<ChangePwdController> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: InputBoxContainer(
-                    hintText: 'Confirmer mot de passe',
+                    hintText: 'Confirmer_mot_de_passe'.tr,
                     iconColor: Color(0xFFA8AFB9),
                     controller: controller.confirmPasswordController,
                   ),
@@ -105,7 +105,7 @@ class ChangePasswordScreen extends GetView<ChangePwdController> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 50),
                   child: MyButton(
-                    txt: 'Enregistrer',
+                    txt: 'Enregistrer'.tr,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         controller.changePassword();
@@ -170,7 +170,7 @@ class InputBoxContainer extends StatelessWidget {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Ce champ est obligatoire';
+                  return 'Ce_champ_est_obligatoire'.tr;
                 }
                 return null;
               },

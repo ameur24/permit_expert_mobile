@@ -29,7 +29,7 @@ class LoginUI extends GetView<AuthController> {
                 ),
                 const SizedBox(height: 32),
                 Text(
-                  "Connexion",
+                  "Connexion".tr,
                   style: TextStyle(
                     fontSize: 24,
                     fontFamily: 'Poppins',
@@ -39,7 +39,7 @@ class LoginUI extends GetView<AuthController> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Bienvenue sur Permit Expert",
+                  "Bienvenue_sur_Permit_Expert".tr,
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'Poppins',
@@ -64,16 +64,16 @@ class LoginUI extends GetView<AuthController> {
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Le champ email est obligatoire';
+                            return 'Le champ_email_est_obligatoire';
                           }
                           if (!value.contains('@gmail.com')) {
-                            return 'Veuillez saisir une adresse email valide (@gmail.com)';
+                            return 'Veuillez_saisir_une_adresse_email_valide (@gmail.com)';
                           }
                           return null;
                         },
                         controller:controller.emailController,
                         decoration: InputDecoration(
-                          hintText: 'Email',
+                          hintText: 'Email'.tr,
                           hintStyle: TextStyle(color: Colors.grey),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -103,14 +103,14 @@ class LoginUI extends GetView<AuthController> {
                       child:TextFormField(
                         validator: (v){
                           if(v!.isEmpty)
-                            return 'Le mot de passe est obligatoire';
+                            return 'Le_mot_de_passe_est_obligatoire';
                    if(v.length<8)
-                     return 'Le mot de passe doit avoir plus que 8 caracteres ';
+                     return 'Le_mot_de_passe_doit_avoir_plus_que_8_caracteres ';
                           return null;
                         },
                         controller:controller. passwordController,
                         decoration: InputDecoration(
-                          hintText: 'Mot de passe',
+                          hintText: 'Mot_de_passe'.tr,
                           hintStyle: TextStyle(color: Colors.grey),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -132,7 +132,7 @@ class LoginUI extends GetView<AuthController> {
 
                       },
                       child: Text(
-                        "Mot de passe oublié ?",
+                        "Mot_de_passe_oublié ?".tr,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -147,14 +147,14 @@ class LoginUI extends GetView<AuthController> {
                             controller.emailController.text, controller.passwordController.text);
 
                       },
-                      txt: 'Se connecter',
+                      txt: 'Se_connecter'.tr,
                     ),
                     const SizedBox(height: 50),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Vous n'avez pas de compte ?",
+                          "Vous_n'avez_pas_de_compte_?".tr,
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
@@ -166,7 +166,7 @@ class LoginUI extends GetView<AuthController> {
 
                           },
                           child: Text(
-                            "S'inscrire",
+                            "S'inscrire".tr,
                             style: TextStyle(
                               color: Colors.orange,
                               fontSize: 14,

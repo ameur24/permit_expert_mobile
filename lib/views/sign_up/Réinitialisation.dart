@@ -28,7 +28,7 @@ class InscriMDP extends GetView<SignUpController> {
                 const SizedBox(height: 32),
                 Center(
                   child: Text(
-                    "Réinitialisation du mot de passe",
+                    "Réinitialisation_du_mot_de_passe".tr,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -40,7 +40,7 @@ class InscriMDP extends GetView<SignUpController> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  "Remplissez le formulaire pour continuer",
+                  "Remplissez_le_formulaire_pour_continuer".tr,
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'Poppins',
@@ -49,36 +49,36 @@ class InscriMDP extends GetView<SignUpController> {
                 ),
                 const SizedBox(height: 32),
                 buildShadowedTextField(
-                  hintText: ' Nouveau Mot de passe',
+                  hintText: ' Nouveau_Mot_de_passe'.tr,
                   prefixIcon: Icons.lock,
                   isPassword: true,
                   controller: controller.newPasswordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Le champ nouveau mot de passe est obligatoire';
+                      return 'Le_champ_nouveau_mot_de_passe_est_obligatoire'.tr;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 15),
                 buildShadowedTextField(
-                  hintText: 'Confirmer votre mot de passe',
+                  hintText: 'Confirmer_votre_mot_de_passe'.tr,
                   prefixIcon: Icons.lock,
                   isPassword: true,
                   controller: controller.confirmNewPasswordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Le champ de confirmation du mot de passe est obligatoire';
+                      return 'Le_champ_de_confirmation_du_mot_de_passe_est_obligatoire'.tr;
                     }
                     if (value != controller.newPasswordController.text) {
-                      return 'Les mots de passe ne correspondent pas';
+                      return 'Les_mots_de_passe_ne_correspondent_pas'.tr;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 69),
                 MyButton(
-                  txt: "Continue",
+                  txt: "Continue".tr,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       controller.updatePassword(
@@ -87,12 +87,12 @@ class InscriMDP extends GetView<SignUpController> {
                         controller.confirmNewPasswordController.text,
                       );
                       Get.snackbar(
-                        "Succès",
-                        "Mot de passe réinitialisé",
+                        "Succès".tr,
+                        "Mot_de_passe_réinitialisé".tr,
                         backgroundColor: Colors.green,
                         colorText: Colors.white,
                       );
-                      print("Le bouton 'Continue' a été pressé !");
+                      print("Le bouton'Continue' a été pressé !");
                     }
                   },
                 ),

@@ -1,13 +1,21 @@
+// theme_controller.dart
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-class ThemeProvider with ChangeNotifier {
-  bool _isDarkMode = false;
+class ThemeController extends GetxController {
+  var isDarkMode = false.obs;
 
-  ThemeData get currentTheme => _isDarkMode ? ThemeData.dark() : ThemeData.light();
-  bool get isDarkMode => _isDarkMode;
+  @override
+  void onInit() {
+    super.onInit();
+    isDarkMode.value = GetStorage().read('isDarkMode') ?? false;
+    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
+  }
 
-  void toggleTheme(bool isDark) {
-    _isDarkMode = isDark;
-    notifyListeners();
+  void toggleDarkMode() {
+    isDarkMode.value = !isDarkMode.value;
+    GetStorage().write('isDarkMode', isDarkMode.value);
+    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
   }
 }

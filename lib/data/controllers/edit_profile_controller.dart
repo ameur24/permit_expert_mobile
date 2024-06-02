@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import '../repository/edit_repo.dart';
 
@@ -16,13 +17,14 @@ class EditProfileController extends GetxController {
 
   final Rx<File?> image = Rx<File?>(null);
   final RxBool isLoading = RxBool(false);
-  final RxList<String> languageOptions = ['Français', 'Arabe', 'Anglais'].obs;
+  var languageOptions = ['Français', 'Anglais', 'Arabe'];
   final RxString selectedLanguage = 'Français'.obs;
 
   @override
   void onInit() {
     super.onInit();
     loadUserProfile();
+    loadSelectedLanguage();
   }
 
   Future<void> loadUserProfile() async {
@@ -96,6 +98,21 @@ class EditProfileController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  // Charge la langue sélectionnée depuis GetStorage
+  void loadSelectedLanguage() {
+    String? savedLanguage = GetStorage().read('selected_language');
+    if (savedLanguage != null) {
+      selectedLanguage.value = savedLanguage;
+      print('Langue sélectionnée chargée depuis GetStorage: $savedLanguage');
+      Get.updateLocale(Locale(savedLanguage));
+    }
+  }
+
+  void saveSelectedLanguage(String language) {
+    GetStorage().write('selected_language', language);
+    print('Langue sélectionnée sauvegardée dans GetStorage: $language');
   }
 
   @override

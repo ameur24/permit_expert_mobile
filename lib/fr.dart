@@ -1,4 +1,4 @@
-import 'package:get/get_navigation/src/root/internacionalization.dart';
+import 'package:get/get.dart';
 
 
 class Fr extends Translations {
@@ -46,9 +46,31 @@ class Fr extends Translations {
   'Voici_une_ressource_qui_peut_vous_aider:': 'Voici une ressource qui peut vous aider:',
   'Voici_un_test_en_ligne_qui_peut_vous_aider:': 'Voici un test en ligne qui peut vous aider:',
   'Voici_quelques_vidéos_qui_peuvent_vous_aider:': 'Voici quelques vidéos qui peuvent vous aider:',
-
-
-
+    'Mode_nuit': 'Mode nuit',
+    'Changer_mot_de_passe':'Changer mot de passe',
+    'Votre_calendrier':'Votre calendrier',
+    'Aucun_événement':'Aucun événement',
+    'Choisir_langage':'choisir langage',
+    'Enregistrer':'Enregistrer',
+    'Envoyer':'Envoyer',
+    'Votre_message_a_été_envoyé_avec_succès':'Votre message a été envoyé avec succès',
+    'Laisser_votre_message': 'Laisser votre message',
+    'Crédits': 'Crédits',
+    'Voir_Tous':'Voir Tous',
+    'Aucune_notification':'Aucune notification',
+    "Mot_de_passe_oublié ?": 'Mot de passe oublié ?',
+    'Réinitialisation_du_mot_de_passe': 'Réinitialisation du mot de passe',
+    'Nouveau_Mot_de_passe': 'Nouveau Mot de passe',
+    'Le_champ_nouveau_mot_de_passe_est_obligatoire': 'Le champ nouveau mot de passe est obligatoire',
+    'Le_champ_de_confirmation_du_mot_de_passe_est_obligatoire': 'Le champ de confirmation du mot de passe est obligatoire',
+    'Les_mots_de_passe_ne_correspondent_pas': 'Les mots de passe ne correspondent pas',
+    'Succès': 'Succès',
+    'Mot_de_passe_réinitialisé': 'Mot de passe réinitialisé',
+    'Le_code_de_vérification_est_correcte': 'Le code de vérification est correcte',
+    'Le_code_doit_être_composé_de_4_chiffres': 'Le code doit être composé de 4 chiffres',
+    'Veuillez_remplir_tous_les_champs_du_code': 'Veuillez remplir tous les champs du code',
+    'Continuer': 'Continuer',
+    'Vous_avez_déjà_un_compte': 'Vous avez déjà un compte ?',
   },
   };
 }

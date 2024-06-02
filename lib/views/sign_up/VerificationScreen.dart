@@ -25,7 +25,7 @@ class VerificationScreen extends GetView<SignUpController> {
               ),
               const SizedBox(height: 32),
               Text(
-                "Code de vérification",
+                "Code_de_vérification".tr,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -36,7 +36,7 @@ class VerificationScreen extends GetView<SignUpController> {
               const SizedBox(height: 8),
               Center(
                 child: Text(
-                  "Nous avons envoyé le code de vérification à votre adresse e-mail",
+                  "Nous_avons_envoyé_le_code_de_vérification_à_votre_adresse_e-mail".tr,
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'Poppins',
@@ -62,13 +62,13 @@ class VerificationScreen extends GetView<SignUpController> {
               ),
               Obx(() {
                 if (controller.codeError.value.isNotEmpty &&
-                    !controller.codeError.value.contains('Le code de vérification est correcte')) {
+                    !controller.codeError.value.contains('Le_code_de_vérification_est_correcte'.tr)) {
                   return Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
                       controller.codeError.value,
                       style: TextStyle(
-                        color: controller.codeError.value.contains(' Le code de vérification est correcte')
+                        color: controller.codeError.value.contains('Le_code_de_vérification_est_correcte'.tr)
                             ? Colors.green
                             : Colors.red,
                       ),
@@ -82,7 +82,7 @@ class VerificationScreen extends GetView<SignUpController> {
               Column(
                 children: [
                   MyButton(
-                    txt: "Continuer",
+                    txt: "Continuer".tr,
                     onPressed: () async {
                       if (validateFields()) {
                         String email = controller.emailController.text;
@@ -91,12 +91,12 @@ class VerificationScreen extends GetView<SignUpController> {
                         if (code.length == 4) {
                           controller.verifyCode(email, code);
                         } else {
-                          controller.codeError.value = "Le code doit être composé de 4 chiffres !";
-                          print("Le code doit être composé de 4 chiffres !");
+                          controller.codeError.value = "Le_code_doit_être_composé_de_4_chiffres !".tr;
+                          print("Le_code_doit_être_composé_d_4_chiffres !".tr);
                         }
                       } else {
                         controller.codeError.value = "Veuillez remplir tous les champs du code !";
-                        print("Veuillez remplir tous les champs du code !");
+                        print("Veuillez_remplir_tous_les_champs_du_code !".tr);
                       }
                     },
                   ),
@@ -105,7 +105,7 @@ class VerificationScreen extends GetView<SignUpController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Vous avez déjà un compte ?",
+                        "Vous_avez_déjà_un_compte ?".tr,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
@@ -116,7 +116,7 @@ class VerificationScreen extends GetView<SignUpController> {
                           Get.toNamed(RouteHelper.signIn);
                         },
                         child: Text(
-                          "Se Connecter",
+                          "Se_Connecter".tr,
                           style: TextStyle(
                             color: Colors.orange,
                             fontSize: 14,

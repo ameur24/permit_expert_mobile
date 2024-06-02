@@ -11,7 +11,7 @@ class ProfilePage2 extends GetView<EditProfileController> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'Profil',
+            'Profil'.tr,
             style: TextStyle(fontSize: 19, fontFamily: 'Poppins'),
           ),
         ),
@@ -140,7 +140,7 @@ class ProfilePage2 extends GetView<EditProfileController> {
                   width: 328,
                   height: 50,
                   child: MyButton(
-                    txt: 'Enregistrer',
+                    txt: 'Enregistrer'.tr,
                     onPressed: () {
                       controller.updateProfile();
                     },

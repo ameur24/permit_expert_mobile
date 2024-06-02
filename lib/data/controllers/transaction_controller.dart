@@ -8,6 +8,7 @@ class TransactionController extends GetxController {
   TransactionController({required this.transactionRepo});
 
   var transactions = <TransactionModel>[].obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -16,27 +17,36 @@ class TransactionController extends GetxController {
   }
 
   void fetchTransactions() async {
-    var fetchedTransactions = await transactionRepo.getTransactions();
-    transactions.value = fetchedTransactions;
+    isLoading.value = true;
+    try {
+      var fetchedTransactions = await transactionRepo.getTransactions();
+      transactions.value = fetchedTransactions;
+    } finally {
+      isLoading.value = false;
+    }
   }
+
   double calculateTotalDebits() {
     return transactions
         .where((transaction) => transaction.typeTransaction == 'flux sortant')
         .fold(0, (sum, transaction) => sum + transaction.montantT);
   }
+
   double calculateTotalCredits() {
     return transactions
         .where((transaction) => transaction.typeTransaction == 'flux entrant')
         .fold(0, (sum, transaction) => sum + transaction.montantT);
   }
+
   double calculateTotalBalanceMoniteur() {
     double totalDebits = calculateTotalDebits();
     double totalCredits = calculateTotalCredits();
-    return totalDebits-totalCredits ;
+    return totalDebits - totalCredits;
   }
+
   double calculateTotalBalanceCandidat() {
     double totalDebits = calculateTotalDebits();
     double totalCredits = calculateTotalCredits();
-    return totalCredits-totalDebits ;
+    return totalCredits - totalDebits;
   }
 }

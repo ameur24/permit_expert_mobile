@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:test2/routes/routes_helper.dart';
-import '../data/controllers/edit_profile_controller.dart';
+import 'package:test2/data/controllers/edit_profile_controller.dart';
+import 'package:get_storage/get_storage.dart';
+import '../utils/theme_provider.dart';
 
 class ParametresPage extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Paramètres')),
+        title: Center(child: Text('Paramètres'.tr)),
       ),
       body: GestureDetector(
         child: SingleChildScrollView(
@@ -24,8 +28,6 @@ class ParametresPage extends GetView<EditProfileController> {
                   } else {
                     return Column(
                       children: [
-                        // Display user image here
-                        // Replace Icon with user image
                         Icon(
                           Icons.account_circle,
                           size: 160,
@@ -59,26 +61,30 @@ class ParametresPage extends GetView<EditProfileController> {
                   children: [
                     ListTile(
                       leading: Icon(Icons.nightlight_round),
-                      title: Text('Mode nuit'),
+                      title: Text('Mode_nuit'.tr),
                       trailing: Container(
                         width: 60,
                         height: 5,
-                        child: CupertinoSwitch(
-                          value: false, // Change this to your actual value
-                          onChanged:(value){},
-                          activeColor: Colors.black,
-                          trackColor: Colors.grey,
-                        ),
+                        child: Obx(() {
+                          return CupertinoSwitch(
+                            value: themeController.isDarkMode.value,
+                            onChanged: (value) {
+                              themeController.toggleDarkMode();
+                            },
+                            activeColor: Colors.black,
+                            trackColor: Colors.grey,
+                          );
+                        }),
                       ),
                     ),
                     ListTile(
                       leading: Icon(Icons.notifications),
-                      title: Text('Notifications'),
+                      title: Text('Notifications'.tr),
                       trailing: Container(
                         width: 60,
                         height: 5,
                         child: CupertinoSwitch(
-                          value: false, // Change this to your actual value
+                          value: false,
                           onChanged: (value) {},
                           activeColor: Colors.black,
                           trackColor: Colors.grey,
@@ -91,19 +97,30 @@ class ParametresPage extends GetView<EditProfileController> {
                       },
                       child: ListTile(
                         leading: Icon(Icons.lock),
-                        title: Text('Changer mot de passe'),
+                        title: Text('Changer_mot_de_passe'.tr),
                       ),
                     ),
                     ExpansionTile(
                       leading: Icon(Icons.language),
-                      title: Text('Choisir langage'),
+                      title: Text('Choisir_langage'.tr),
                       children: controller.languageOptions.map((String language) {
                         return RadioListTile(
                           title: Text(language),
                           value: language,
                           groupValue: controller.selectedLanguage.value,
                           onChanged: (String? value) {
-                            controller.selectedLanguage.value = value!;
+                            if (value != null) {
+                              controller.selectedLanguage.value = value;
+                              if (value == 'Français') {
+                                Get.updateLocale(Locale('fr', 'FR'));
+                              } else if (value == 'Anglais') {
+                                Get.updateLocale(Locale('en', 'US'));
+                              } else if (value == 'Arabe') {
+                                Get.updateLocale(Locale('ar', 'SA'));
+                              }
+                              GetStorage().write('selected_language', value);
+                              print('Updated locale: ${Get.locale}');
+                            }
                           },
                         );
                       }).toList(),

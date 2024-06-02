@@ -8,12 +8,11 @@ import '../../widgets/container/PaiementContainer.dart';
 class PaymentScreen extends GetView<TransactionController> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text(
-            'Paiement',
+            'Paiement'.tr,
             style: TextStyle(fontSize: 19, fontFamily: 'Poppins'),
           ),
         ),
@@ -33,10 +32,16 @@ class PaymentScreen extends GetView<TransactionController> {
         ],
       ),
       body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
         if (controller.transactions.isEmpty) {
           return Center(
             child: Text(
-              'Aucune transaction disponible',
+              'Aucune_transaction_disponible'.tr,
               style: TextStyle(fontSize: 20, color: Colors.grey, fontFamily: 'Poppins'),
             ),
           );
@@ -66,7 +71,7 @@ class PaymentScreen extends GetView<TransactionController> {
                           Padding(
                             padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
                             child: Text(
-                              'Solde Total',
+                              'Solde_Total'.tr,
                               style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: 'Poppins',
@@ -106,7 +111,7 @@ class PaymentScreen extends GetView<TransactionController> {
                             Padding(
                               padding: const EdgeInsets.only(right: 70),
                               child: Text(
-                                'Débits',
+                                'Débits'.tr,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -143,7 +148,7 @@ class PaymentScreen extends GetView<TransactionController> {
                             Padding(
                               padding: const EdgeInsets.only(right: 80),
                               child: Text(
-                                'Crédits',
+                                'Crédits'.tr,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -175,7 +180,7 @@ class PaymentScreen extends GetView<TransactionController> {
                     Padding(
                       padding: const EdgeInsets.only(left: 25),
                       child: Text(
-                        'Historique de paiement',
+                        'Historique_de_paiement'.tr,
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: 'Poppins',
@@ -192,7 +197,7 @@ class PaymentScreen extends GetView<TransactionController> {
                       child: Padding(
                         padding: const EdgeInsets.only(right: 18),
                         child: Text(
-                          'Voir Tous',
+                          'Voir_Tous'.tr,
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: 'Poppins',
@@ -212,7 +217,7 @@ class PaymentScreen extends GetView<TransactionController> {
                         subtitle: transaction.dateT,
                         argentText: '${transaction.montantT} DT',
                       ),
-                      SizedBox(height: 10), // Add spacing here
+                      SizedBox(height: 10),
                     ],
                   );
                 }).toList(),

@@ -12,7 +12,7 @@ class ListNotifications extends GetView<NotificationController> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'Notifications',
+            'Notifications'.tr,
             style: TextStyle(fontSize: 19, fontFamily: 'Poppins'),
           ),
         ),
@@ -26,7 +26,11 @@ class ListNotifications extends GetView<NotificationController> {
         ],
       ),
       body: Obx(() {
-        if (controller.notifications.isEmpty) {
+        if (controller.isLoading.value) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (controller.notifications.isEmpty) {
           return _buildEmptyState();
         } else {
           return Container(
@@ -66,7 +70,7 @@ class ListNotifications extends GetView<NotificationController> {
           ),
           SizedBox(height: 20),
           Text(
-            'Aucune notification',
+            'Aucune_notification'.tr,
             style: TextStyle(
               fontSize: 20,
               color: Colors.grey,

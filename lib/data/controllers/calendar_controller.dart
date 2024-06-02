@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:test2/utils/utils.dart';
+import 'package:intl/intl.dart';
+import '../../utils/utils.dart';
 import '../repository/calendar_repo.dart';
 import '../../models/seance_model.dart';
 import '../../models/examen_model.dart';
@@ -12,7 +13,7 @@ class CalendarController extends GetxController {
   var seances = <Seance>[].obs;
   var examens = <Examen>[].obs;
   var eventDays = <DateTime>[].obs;
-  var isLoading = false.obs; // Add loading state
+  var isLoading = false.obs;
 
   CalendarController({required this.calendarRepo});
 
@@ -30,16 +31,16 @@ class CalendarController extends GetxController {
   }
 
   void fetchSeancesForSelectedDay() async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
       seances.clear();
       examens.clear();
 
-      final formattedDate = "${selectedDay.value.year}-${selectedDay.value.month}-${selectedDay.value.day}";
+      final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDay.value);
       final response = await calendarRepo.fetchSeancesForDate(formattedDate);
       if (response.statusCode == 404) {
         print("une erreur est survenue");
-        isLoading.value = false; // End loading
+        isLoading.value = false;
         return;
       }
       final data = response.body;
@@ -47,20 +48,24 @@ class CalendarController extends GetxController {
       examens.value = (data['examens'] as List?)?.map((e) => Examen.fromJson(e)).toList() ?? [];
     } catch (e) {
       print('Error fetching seances and exams for selected day: $e');
-      Get.snackbar('Error', 'An error occurred while fetching events for the selected date');
     } finally {
-      isLoading.value = false; // End loading
+      isLoading.value = false;
     }
   }
 
   void fetchEventDays() async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
       final response = await calendarRepo.fetchEvents();
       final data = response.body;
 
-      List<DateTime> seanceDates = (data['seances'] as List).map((date) => DateTime.parse(date.toString())).toList();
-      List<DateTime> examenDates = (data['examens'] as List).map((date) => DateTime.parse(date.toString())).toList();
+      List<DateTime> seanceDates = (data['seances'] as List).map((date) {
+        return DateTime.parse(date.toString()).toLocal();
+      }).toList();
+
+      List<DateTime> examenDates = (data['examens'] as List).map((date) {
+        return DateTime.parse(date.toString()).toLocal();
+      }).toList();
 
       eventDays.value = [
         ...seanceDates,
@@ -69,12 +74,12 @@ class CalendarController extends GetxController {
     } catch (e) {
       print('Error fetching event days: $e');
     } finally {
-      isLoading.value = false; // End loading
+      isLoading.value = false;
     }
   }
 
   Future acceptExamen(int examenId) async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
       final response = await calendarRepo.acceptExamen(examenId);
       if (response.statusCode == 200) {
@@ -87,12 +92,12 @@ class CalendarController extends GetxController {
     } catch (e) {
       print('Error accepting examen: $e');
     } finally {
-      isLoading.value = false; // End loading
+      isLoading.value = false;
     }
   }
 
   Future refuserExamen(int examenId) async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
       final response = await calendarRepo.refuserExamen(examenId);
       if (response.statusCode == 200) {
@@ -105,12 +110,12 @@ class CalendarController extends GetxController {
     } catch (e) {
       print('Error refusing examen: $e');
     } finally {
-      isLoading.value = false; // End loading
+      isLoading.value = false;
     }
   }
 
   Future acceptSeance(int seanceId) async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
       final response = await calendarRepo.acceptSeance(seanceId);
       if (response.statusCode == 200) {
@@ -127,12 +132,12 @@ class CalendarController extends GetxController {
     } catch (e) {
       print('Error accepting seance: $e');
     } finally {
-      isLoading.value = false; // End loading
+      isLoading.value = false;
     }
   }
 
   Future refuserSeance(int seanceId) async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
       final response = await calendarRepo.RefuserSeance(seanceId);
       if (response.statusCode == 200) {
@@ -149,7 +154,7 @@ class CalendarController extends GetxController {
     } catch (e) {
       print('Error refusing seance: $e');
     } finally {
-      isLoading.value = false; // End loading
+      isLoading.value = false;
     }
   }
 

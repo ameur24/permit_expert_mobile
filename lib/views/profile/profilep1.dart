@@ -23,7 +23,7 @@ class ProfilePage extends GetView<EditProfileController> {
     return AppBar(
       title: Center(
         child: Text(
-          'Profil',
+          'Profil'.tr,
           style: TextStyle(fontSize: 19, fontFamily: 'Poppins'),
         ),
       ),

@@ -8,6 +8,7 @@ class NotificationController extends GetxController {
   NotificationController({required this.notificationRepo});
 
   var notifications = <NotificationModel>[].obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -16,6 +17,7 @@ class NotificationController extends GetxController {
   }
 
   void fetchNotifications() async {
+    isLoading.value = true;
     try {
       var fetchedNotifications = await notificationRepo.getNotifications();
       if (fetchedNotifications != null) {
@@ -25,7 +27,9 @@ class NotificationController extends GetxController {
       }
     } catch (e) {
       print("Error fetching notifications: $e");
+    } finally {
+      isLoading.value = false;
     }
-  }
 
+  }
 }
