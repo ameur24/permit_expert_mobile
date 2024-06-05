@@ -49,7 +49,7 @@ class InscriMDP extends GetView<SignUpController> {
                 ),
                 const SizedBox(height: 32),
                 buildShadowedTextField(
-                  hintText: ' Nouveau_Mot_de_passe'.tr,
+                  hintText: 'Nouveau_Mot_de_passe'.tr,
                   prefixIcon: Icons.lock,
                   isPassword: true,
                   controller: controller.newPasswordController,

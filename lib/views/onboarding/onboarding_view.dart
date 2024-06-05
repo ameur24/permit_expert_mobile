@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:test2/routes/routes_helper.dart';
 import 'package:test2/widgets/my_botton/my_button.dart';
 import 'package:test2/views/onboarding/onboarding_items.dart';
 import 'package:test2/views/sign_up/sign_up.dart';
@@ -107,10 +109,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   );
                 } else {
                   GetStorage().write('is_first_time', false);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUp()),
-                  );
+                 Get.toNamed(RouteHelper.signEmail);
                 }
               },
             ),
@@ -118,10 +117,7 @@ class _OnboardingViewState extends State<OnboardingView> {
             SubButton(
               txt: "ignorer",
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUp()),
-                );
+                Get.toNamed(RouteHelper.signEmail);
               },
             ),
           ],

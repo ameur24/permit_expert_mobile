@@ -24,6 +24,7 @@ import 'package:test2/views/sign_up/mdpOublie.dart';
 import '../data/bindings/calendar_binding.dart';
 import '../data/bindings/change_pwd_binding.dart';
 import '../data/bindings/edit_profile_binding.dart';
+import '../data/bindings/learn_binding.dart';
 import '../data/bindings/message_binding.dart';
 import '../data/bindings/notification_binding.dart';
 import '../data/bindings/sign_up_binding.dart';
@@ -152,32 +153,32 @@ class RouteHelper {
     GetPage(
         name: learnCode,
         page: () => LearnScreen(),
-        binding: LoginBinding(),
+        binding: LearnBinding(),
         transition: Transition.cupertino,
     ),
     GetPage(
         name: learn1,
         page: () => MyScreen(),
-        binding: LoginBinding(),
+        binding: LearnBinding(),
         transition: Transition.cupertino,
 
     ),
     GetPage(
         name: learn2,
         page: () => MyScreen1(),
-        binding: LoginBinding(),
+        binding: LearnBinding(),
         transition: Transition.cupertino,
     ),
     GetPage(
         name: learn3,
         page: () => MyScreen2(),
-        binding: LoginBinding(),
+        binding: LearnBinding(),
         transition: Transition.cupertino,
     ),
     GetPage(
         name: learn4,
         page: () => MyScreen3(),
-        binding: LoginBinding(),
+        binding: LearnBinding(),
         transition: Transition.cupertino,
     ),
 

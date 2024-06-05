@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:test2/routes/routes_helper.dart';
 import '../repository/edit_repo.dart';
 
 class EditProfileController extends GetxController {
@@ -86,8 +87,9 @@ class EditProfileController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        Get.snackbar('Succès', response.body['message']);
-        Get.back();
+        Get.snackbar('Succès', response.body['message'], backgroundColor: Colors.lightGreen,);
+
+       Get.toNamed(RouteHelper.profile);
       } else {
         print('Server error: ${response.statusCode}');
         print('Server response: ${response.body}');
@@ -100,7 +102,6 @@ class EditProfileController extends GetxController {
     }
   }
 
-  // Charge la langue sélectionnée depuis GetStorage
   void loadSelectedLanguage() {
     String? savedLanguage = GetStorage().read('selected_language');
     if (savedLanguage != null) {

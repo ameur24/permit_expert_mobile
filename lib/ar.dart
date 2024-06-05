@@ -54,6 +54,63 @@ class Ar extends Translations {
       'Envoyer': 'إرسال',
       'Votre_message_a_été_envoyé_avec_succès': 'تم إرسال رسالتك بنجاح',
       'Laisser_votre_message': 'اترك رسالتك',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       'Crédits': 'الائتمان',
       'Historique_de_paiement': 'سجل الدفع',
       'Paiement':'الدفع',

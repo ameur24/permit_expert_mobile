@@ -62,7 +62,7 @@ class MessageScreen extends GetView<MessageController> {
                       controller: controller.messageController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Veuillez_saisir_votre_message';
+                          return 'Veuillez_saisir_votre_message'.tr;
                         }
                         return null;
                       },

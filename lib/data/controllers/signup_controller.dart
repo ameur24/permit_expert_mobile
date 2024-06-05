@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test2/views/sign_up/codeV%C3%A9rifMDP.dart';
 
@@ -169,7 +170,9 @@ class SignUpController extends GetxController {
       if (response.statusCode == 200) {
         print("Informations de l'utilisateur mises à jour avec succès");
             Get.toNamed(RouteHelper.signIn);
-      } else {
+            Get.snackbar('succés', "Informations de l'utilisateur mises à jour avec succès",backgroundColor: Colors.lightGreen);
+      }
+      else {
         print("Une erreur s'est produite lors de la mise à jour du profil");
       }
     } catch (e) {

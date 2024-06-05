@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test2/views/Notification/notification.dart';
-import 'package:test2/views/profile/profilep1.dart';
-
+import '../../data/controllers/learn_controller.dart';
 import '../../routes/routes_helper.dart';
 import '../../widgets/container/greencontainer.dart';
 import '../../widgets/container/learnContainer.dart';
-import '../../widgets/container/vidcontainer.dart';
 import '../Notification/list_notifications.dart';
 
-class MyScreen3 extends StatelessWidget {
+class MyScreen3 extends GetView<LearnController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,85 +22,68 @@ class MyScreen3 extends StatelessWidget {
             icon: Icon(Icons.account_circle),
             onPressed: () {
               Get.toNamed(RouteHelper.profile);
-
-              //Get.to(ProfilePage());
             },
           ),
         ],
       ),
+
       body: Column(
         children: [
           SizedBox(height: 30),
+
           GreenContainer(
-            titre:  'Série_nb'.tr+' 4',
-            sousTitre:  'Conduite_Maitrisée'.tr,
-            imageUrl: "assets/images/27-removebg-preview 1.png",
-            imageWidth: 150,
+            titre: controller.resources
+                .where((resource) => resource.series == 'Série n°4')
+                .first
+                .series,
+            sousTitre: controller.resources
+                .where((resource) => resource.series == 'Série n°4')
+                .first
+                .title,
+            imageUrl: "assets/images/may-removebg-preview 1.png",
+            imageWidth: 160,
             imageHeight: 150,
           ),
+
+
           SizedBox(height: 10),
-          LearnContainer(
-            containerWidth: 325,
-            containerHeight: 111,
-            barWidth: 2,
-            barHeight: 70,
-            title: "Voici une ressource qui peut vous aider:",
-            link: "https://www.ressource.com/",
-          ),
+          Obx(() {
+            if (controller.isLoading.value) {
+              return Center(child: CircularProgressIndicator());
+            } else if (controller.errorMessage.isNotEmpty) {
+              return Center(child: Text(controller.errorMessage.value));
+            } else {
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: controller.resources
+                      .where((resource) => resource.series == 'Série n°4')
+                      .length,
+                  itemBuilder: (context, index) {
+                    final resource = controller.resources
+                        .where((resource) => resource.series == 'Série n°4')
+                        .toList()[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 15),
+
+                        child: LearnContainer(
+                          containerWidth: 310,
+                          containerHeight: 111,
+                          barWidth: 2,
+                          barHeight: 70,
+                          title: resource.description,
+                          link: resource.link,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            }
+          }),
           SizedBox(height: 10),
-          LearnContainer(
-            containerWidth: 330,
-            containerHeight: 111,
-            barWidth: 2,
-            barHeight: 75,
-            title: 'Voici_un_test_en_ligne_qui_peut_vous_aider:'.tr,
-            link: "https://www.permisecole.com/code/gratuit",
-          ),
-          SizedBox(height: 10),
-          VContainer(
-            containerWidth: 325,
-            containerHeight: 260,
-            barWidth: 2,
-            barHeight: 228,
 
-            title: 'Voici_quelques_vidéos_qui_peuvent_vous_aider:'.tr,
-            imagePaths: [
-              'assets/images/vid1.png',
-              'assets/images/vid1.png',
-              'assets/images/vid1.png',
-
-              'assets/images/vid1.png',
-              'assets/images/vid1.png',
-              'assets/images/vid1.png',
-            ],
-            imageUrls: [
-              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
-              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
-              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
-
-              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
-              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
-              'https://www.youtube.com/watch?v=392Kf6pjNjs&ab_channel=IbraheemAlHosani',
-            ],
-            imageWidths: [
-              82,
-              82,
-              82,
-
-              82,
-              82,
-              82,
-            ],
-            imageHeights: [
-              68,
-              68,
-              68,
-
-              68,
-              68,
-              68,
-            ],
-          ),
         ],
       ),
     );

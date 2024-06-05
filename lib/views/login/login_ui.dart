@@ -64,10 +64,10 @@ class LoginUI extends GetView<AuthController> {
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Le champ_email_est_obligatoire';
+                            return 'Le champ_email_est_obligatoire'.tr;
                           }
                           if (!value.contains('@gmail.com')) {
-                            return 'Veuillez_saisir_une_adresse_email_valide (@gmail.com)';
+                            return 'Veuillez_saisir_une_adresse_email_valide (@gmail.com)'.tr;
                           }
                           return null;
                         },
@@ -103,9 +103,9 @@ class LoginUI extends GetView<AuthController> {
                       child:TextFormField(
                         validator: (v){
                           if(v!.isEmpty)
-                            return 'Le_mot_de_passe_est_obligatoire';
+                            return 'Le_mot_de_passe_est_obligatoire'.tr;
                    if(v.length<8)
-                     return 'Le_mot_de_passe_doit_avoir_plus_que_8_caracteres ';
+                     return 'Le_mot_de_passe_doit_avoir_plus_que_8_caracteres'.tr;
                           return null;
                         },
                         controller:controller. passwordController,

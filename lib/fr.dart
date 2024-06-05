@@ -71,6 +71,10 @@ class Fr extends Translations {
     'Veuillez_remplir_tous_les_champs_du_code': 'Veuillez remplir tous les champs du code',
     'Continuer': 'Continuer',
     'Vous_avez_déjà_un_compte': 'Vous avez déjà un compte ?',
+    'Historique_de_paiement':'Historique de paiement',
+    'Solde_Total':'Solde Total',
+    'Nouveau_Mot_de_passe':'Nouveau_Mot_de_passe',
+
   },
   };
 }

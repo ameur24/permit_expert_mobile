@@ -18,10 +18,10 @@ class GreenContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20),
+      margin: EdgeInsets.only(left: 15 ,right: 10),
       child: Container(
         height: 111,
-        width: 325,
+        width: 360,
         decoration: BoxDecoration(
           color: Color(0xFF9DCD5A),
           borderRadius: BorderRadius.circular(10),
